@@ -13,10 +13,12 @@ def name_value_validator(value):
 
 class PawsSearchUser(auth_model.AbstractUser):
     NAME_MIN_LENGTH = 3
-    NAME_MAX_LENGTH = 100
+    NAME_MAX_LENGTH = 50
 
     first_name = models.CharField(
         max_length=NAME_MAX_LENGTH,
+        blank=True,
+        null=True,
         verbose_name="First name",
         validators=(
             validators.MinLengthValidator(NAME_MIN_LENGTH),
@@ -26,6 +28,8 @@ class PawsSearchUser(auth_model.AbstractUser):
 
     last_name = models.CharField(
         max_length=NAME_MAX_LENGTH,
+        blank=True,
+        null=True,
         verbose_name="Last name",
         validators=(
             validators.MinLengthValidator(NAME_MIN_LENGTH),
@@ -36,8 +40,8 @@ class PawsSearchUser(auth_model.AbstractUser):
     email = models.EmailField(
         verbose_name="Email",
         unique=True,
-        null=False,
         blank=False,
+        null=False,
     )
 
     profile_picture = models.URLField(
@@ -45,14 +49,11 @@ class PawsSearchUser(auth_model.AbstractUser):
         blank=True,
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name']
-
     @property
     def full_name(self):
-        if self.last_name:
+        if self.last_name or self.last_name:
             return f'{self.first_name} {self.last_name}'
-        return self.first_name
+        return self.username
 
     def save(self, *args, **kwargs):
         result = super().save(*args, **kwargs)

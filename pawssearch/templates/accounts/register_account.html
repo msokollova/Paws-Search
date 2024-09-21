@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load forms %}
+{% block content %}
+
+    <form class="w3-card-4 w3-round w3-display-middle w3-light-grey" method="post" action="{% url 'register' %}">
+        <h2 class="w3-text-light-grey w3-center">Sign Up</h2>
+
+        {% csrf_token %}
+        <!-- Username Field -->
+        <p>
+            <label class="w3-text-black"><b>Username</b></label><br>
+            <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="text" name="username"
+                   placeholder="Enter your username" value="{{ form.username.value|default_if_none:'' }}">
+
+            <!-- Display any username errors -->
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <!-- Email Field -->
+        <p>
+            <label class="w3-text-black"><b>Email</b></label><br>
+            <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="email" name="email"
+                   placeholder="Enter your email" value="{{ form.email.value|default_if_none:'' }}">
+
+            <!-- Display any email errors -->
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <!-- Password Field 1 -->
+        <p>
+            <label class="w3-text-black"><b>Password</b></label><br>
+            <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="password" name="password1"
+                   placeholder="Enter your password" autocomplete="new-password">
+
+            <!-- Display any password1 errors -->
+            {% if form.password1.errors %}
+                {% for error in form.password1.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <!-- Password Field 2 -->
+        <p>
+            <label class="w3-text-black"><b>Confirm Password</b></label><br>
+            <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="password" name="password2"
+                   placeholder="Confirm your password" autocomplete="new-password">
+
+            <!-- Display any password2 errors -->
+            {% if form.password2.errors %}
+                {% for error in form.password2.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+
+        <p>If you already have an account, <a href="{% url 'login' %}" style="color:dodgerblue">Login</a></p>
+        <p class="w3-center">
+            <input type="hidden" value="{{ next }}" name="next"/>
+            {% csrf_token %}
+            <button class="w3-button w3-round-large w3-black w3-text-light-grey w3-hover-text-light-blue w3-hover-black w3-large"
+                    type="submit">Sign Up
+            </button>
+        </p>
+    </form>
+
+{% endblock %}
