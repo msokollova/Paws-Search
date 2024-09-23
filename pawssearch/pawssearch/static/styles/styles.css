@@ -6,16 +6,26 @@ html {
     width:120px;
 }
 
-main > form {
+main > .auth_form {
     padding: 16px;
     align-content: center;
     width: 40%;
 }
 
+main > .other_form {
+    width: 100%;
+
+}
+
 form > h2 {
     background: black;
+
 }
 
 form > input {
     width: 300px
 }
+
+
+
+

@@ -21,9 +21,7 @@ class RegisterView(views.CreateView):
 
     def form_valid(self, form):
         result = super().form_valid(form)
-
         login(self.request, self.object)
-
         return result
 
     def form_invalid(self, form):
@@ -46,6 +44,9 @@ class EditProfileView(views.UpdateView):
     form_class = EditProfileForm
     success_url = reverse_lazy('index')
 
+    def get_object(self, queryset=None):
+        return self.request.user
+
 
 class DeleteProfileView(views.DeleteView):
     model = UserModel
@@ -59,7 +60,6 @@ class DeleteProfileView(views.DeleteView):
 
 class PasswordChangeView(auth_views.PasswordChangeView):
     form_class = PasswordChangeForm
-    model = UserModel
     template_name = 'accounts/change_password.html'
     success_url = reverse_lazy('password change done')
 

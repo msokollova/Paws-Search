@@ -3,8 +3,8 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey" method="post"
-              action="{% url 'delete_profile' user.pk %}">
+        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey auth_form" method="post"
+              action="{% url 'delete profile' user.pk %}">
             {% csrf_token %}
             <h2 class="w3-text-light-grey w3-center">Are you sure you want to delete your profile?</h2>
             <p class="w3-text-black w3-center">

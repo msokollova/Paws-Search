@@ -62,6 +62,7 @@
         </div>
         <a href="#"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Create
+            a
             post</a>
         <a href="#"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">My
@@ -69,10 +70,12 @@
         <a href="#"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Followed
             posts</a>
-        <a href="#"
+        <a href="{% url 'edit profile' request.user.pk %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Edit
             profile</a>
-        <a href="{% url 'delete_profile' request.user.pk %}"
+        <a href="{% url 'change password' request.user.pk %}"
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Change password</a>
+        <a href="{% url 'delete profile' request.user.pk %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">
             Delete profile
         </a>
