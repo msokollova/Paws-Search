@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import views as auth_views, get_user_model, login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -32,11 +33,10 @@ class RegisterView(views.CreateView):
 class LoginView(auth_views.LoginView):
     form_class = LogInForm
     template_name = 'accounts/login.html'
-    success_url = reverse_lazy('index')  # Redirect after successful login
+    success_url = reverse_lazy('index')
 
     def form_invalid(self, form):
-        print(form.errors)
-        # Handle form validation errors here
+        messages.error(self.request, "Invalid username or password.")
         return super().form_invalid(form)
 
 
@@ -51,6 +51,10 @@ class DeleteProfileView(views.DeleteView):
     model = UserModel
     template_name = 'accounts/delete_profile.html'
     success_url = reverse_lazy('index')
+
+    def get_queryset(self):
+        # Only allow deletion of the logged-in user's profile
+        return UserModel.objects.filter(pk=self.request.user.pk)
 
 
 class PasswordChangeView(auth_views.PasswordChangeView):

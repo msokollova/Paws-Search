@@ -6,36 +6,48 @@
     {% else %}
         <form class="w3-card-4 w3-round w3-display-middle w3-light-grey" method="post" action="{% url 'login' %}">
             <h2 class="w3-text-light-grey w3-center">Login</h2>
-
             {% csrf_token %}
-
+            <p>
+                {% if messages %}
+                    <div class="w3-container w3-padding">
+                        {% for message in messages %}
+                            <div class="w3-panel w3-pale-blue w3-leftbar w3-border-light-blue">
+                                <p>{{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </p>
             <p>
                 <label class="w3-text-black"><b>Username</b></label><br>
                 <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="text" name="username"
-                       placeholder="Enter your username">
+                       placeholder="Enter your username" required>
 
                 {% if form.username.errors %}
-                    {% for error in form.username.errors %}
-                        <span class="w3-text-red w3-small">{{ error }}</span><br>
-                    {% endfor %}
+                    <div class="w3-text-red w3-small">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </p>
 
             <p>
                 <label class="w3-text-black"><b>Password</b></label><br>
                 <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="password" name="password"
-                       placeholder="Enter your password" autocomplete="current-password">
-            
+                       placeholder="Enter your password" autocomplete="current-password" required>
+
                 {% if form.password.errors %}
-                    {% for error in form.password.errors %}
-                        <span class="w3-text-red w3-small">{{ error }}</span><br>
-                    {% endfor %}
+                    <div class="w3-text-red w3-small">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span><br>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </p>
 
             <p>If you don't have an account yet, <a href="{% url 'register' %}" style="color:dodgerblue">Sign Up</a></p>
             <p class="w3-center">
-
                 <button class="w3-button w3-round-large w3-black w3-text-light-grey w3-hover-text-light-blue w3-hover-black w3-large"
                         type="submit">Login
                 </button>
@@ -43,8 +55,3 @@
         </form>
     {% endif %}
 {% endblock %}
-
-
-
-
-

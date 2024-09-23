@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey" method="post"
+              action="{% url 'delete_profile' user.pk %}">
+            {% csrf_token %}
+            <h2 class="w3-text-light-grey w3-center">Are you sure you want to delete your profile?</h2>
+            <p class="w3-text-black w3-center">
+                Please, have in mind that if you delete your profile, all your posts will be deleted too!
+            </p>
+            <div class="w3-center">
+                <a class="w3-button w3-round-large w3-black w3-text-light-grey w3-hover-text-light-blue w3-hover-black w3-large"
+                   style="width:20%"
+                   href="{{ request.META.HTTP_REFERER|default:'/'|escape }}">Cancel</a>
+                <button type="submit"
+                        class="w3-button w3-round-large w3-black w3-text-light-grey w3-hover-text-light-blue w3-hover-black w3-large"
+                        style="width:20%">
+                    Yes
+                </button>
+            </div>
+        </form>
+    {% else %}
+        <script type="text/javascript">
+            window.location.href = "{% url 'index' %}";
+        </script>
+    {% endif %}
+
+{% endblock %}

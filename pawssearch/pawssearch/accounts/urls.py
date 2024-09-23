@@ -9,7 +9,8 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', views.RegisterView.as_view(), name='register'),
     path('profile/<int:pk>/', include([
-        path('change_password', views.PasswordChangeView.as_view(), name='change_password')
+        path('change_password', views.PasswordChangeView.as_view(), name='change_password'),
+        path('delete_profile/', views.DeleteProfileView.as_view(), name='delete_profile'),
 
     ])),
 
