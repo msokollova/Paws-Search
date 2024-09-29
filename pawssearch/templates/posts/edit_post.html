@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post">
+        <h2 class="w3-text-light-grey w3-center">Edit Post</h2>
+
+        {% csrf_token %}
+
+        <p>
+            <label class="w3-text-black"><b>Title</b></label><br>
+            {{ form.title }}
+            {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Description</b></label><br>
+            {{ form.description }}
+            {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Pet</b></label><br>
+            {{ form.pet_type }}
+            {% if form.pet_type.errors %}
+                {% for error in form.pet_type.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Post Type</b></label><br>
+            {{ form.post_type }}
+            {% if form.post_type.errors %}
+                {% for error in form.post_type.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Contact Number</b></label><br>
+            {{ form.contact_info }}
+            {% if form.contact_info.errors %}
+                {% for error in form.contact_info.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Image URL</b></label><br>
+            {{ form.image }}
+            {% if form.image.errors %}
+                {% for error in form.image.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Region</b></label><br>
+            {{ form.region }}
+            {% if form.region.errors %}
+                {% for error in form.region.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+        <div class="w3-center">
+            <a href="{% url 'user posts' %}"
+               class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Back</a>
+            <button class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
+                    type="submit">Save
+            </button>
+
+        </div>
+    </form>
+{% endblock %}

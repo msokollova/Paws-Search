@@ -28,6 +28,17 @@ class Pets(Enum):
         return [(choice.name, choice.value) for choice in cls]
 
 
+class PostTypes(Enum):
+    FOUND = 'Found'
+    MISSING = 'Missing'
+    FOR_ADOPTION = 'For Adoption'
+    FOR_SELLING = 'For Selling'
+
+    @classmethod
+    def choices(cls):
+        return [(choice.name, choice.value) for choice in cls]
+
+
 class Regions(Enum):
     BLAGOEVGRAD = 'Blagoevgrad'
     BURGAS = 'Burgas'
@@ -83,8 +94,17 @@ class Posts(models.Model):
         blank=False,
     )
 
+    post_type = models.CharField(
+        max_length=100,
+        choices=PostTypes.choices(),
+        null=False,
+        blank=False,
+    )
+
     contact_info = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
     )
 
     image = models.URLField(

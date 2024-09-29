@@ -2,8 +2,8 @@ html {
     scroll-behavior: smooth;
 }
 
-.logo-img > img{
-    width:120px;
+.logo-img > img {
+    width: 120px;
 }
 
 main > .auth_form {
@@ -24,6 +24,10 @@ form > h2 {
 
 form > input {
     width: 300px
+}
+
+.h2 {
+    margin: 20px 0;
 }
 
 

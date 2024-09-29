@@ -60,11 +60,11 @@
 
             <p class="w3-large">Hello, {{ request.user.full_name }}</p>
         </div>
-        <a href="#"
+        <a href="{% url 'create post' %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Create
             a
             post</a>
-        <a href="#"
+        <a href="{% url 'user posts' %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">My
             posts</a>
         <a href="#"
@@ -74,7 +74,8 @@
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Edit
             profile</a>
         <a href="{% url 'change password' request.user.pk %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Change password</a>
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Change
+            password</a>
         <a href="{% url 'delete profile' request.user.pk %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">
             Delete profile

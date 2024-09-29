@@ -78,22 +78,5 @@ class FollowedPostsListView(LoginRequiredMixin, ListView):
         return Follow.objects.filter(user=self.request.user).select_related('post')
 
 
-def user_posts(request):
-    all_posts = Posts.objects.filter(user=request.user).order_by('pub_date')
-    paginator = Paginator(all_posts, per_page=5)
-    page_number = request.GET.get('page', 1)
-    try:
-        posts = paginator.page(page_number)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-
-    context = {
-        'posts': posts,
-    }
-    return render(request, 'accounts/user_posts.html', context)
-
-
 class LogoutView:
     pass
