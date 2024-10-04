@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <form class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post">
+    <form class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post"
+          action="{% url 'edit post' pk=posts.pk %}">
+
         <h2 class="w3-text-light-grey w3-center">Edit Post</h2>
 
         {% csrf_token %}
-
         <p>
             <label class="w3-text-black"><b>Title</b></label><br>
             {{ form.title }}
@@ -65,7 +66,6 @@
                 {% endfor %}
             {% endif %}
         </p>
-
         <p>
             <label class="w3-text-black"><b>Region</b></label><br>
             {{ form.region }}
@@ -75,13 +75,19 @@
                 {% endfor %}
             {% endif %}
         </p>
+        <p>
+            <label class="w3-text-black"><b>Status</b></label><br>
+            <select name="is_active" class="w3-select">
+                <option value="True" {% if form.instance.is_active %}selected{% endif %}>Active</option>
+                <option value="False" {% if not form.instance.is_active %}selected{% endif %}>Inactive</option>
+            </select>
+        </p>
         <div class="w3-center">
             <a href="{% url 'user posts' %}"
                class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Back</a>
             <button class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
                     type="submit">Save
             </button>
-
         </div>
     </form>
 {% endblock %}

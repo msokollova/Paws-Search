@@ -30,7 +30,7 @@
 
     <a href="#"
        class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Articles</a>
-    <a href="#"
+    <a href="{% url 'all active posts' %}"
        class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Posts</a>
 </div>
 
@@ -67,7 +67,7 @@
         <a href="{% url 'user posts' %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">My
             posts</a>
-        <a href="#"
+        <a href="{% url 'followed posts' %}"
            class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Followed
             posts</a>
         <a href="{% url 'edit profile' request.user.pk %}"

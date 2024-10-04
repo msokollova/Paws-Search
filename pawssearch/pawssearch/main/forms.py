@@ -1,5 +1,6 @@
 from django import forms
-from .models import Comment
+
+from pawssearch.main.models import Comment
 
 
 class CommentForm(forms.ModelForm):
@@ -7,5 +8,5 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['comment']
         widgets = {
-            'comment': forms.Textarea(attrs={'placeholder': 'Add a comment...', 'rows': 3}),
+            'comment': forms.Textarea(attrs={'class': 'w3-input', 'placeholder': 'Add a comment...', 'rows': 3}),
         }

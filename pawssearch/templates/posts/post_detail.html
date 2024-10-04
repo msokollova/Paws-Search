@@ -3,9 +3,26 @@
 {% block content %}
     <h2 class="w3-text-light-grey w3-center w3-black w3-margin h2">Details</h2>
     <div class="w3-container">
-        <!-- Post Information -->
         <div class="w3-card-4">
             <div class="w3-container w3-padding w3-round w3-margin">
+                <div id="follow-unfollow-btn" class="w3-container w3-padding w3-right">
+                    {% if is_post_author %}
+                        <p><strong>Followers:</strong> {{ follower_count }}</p>
+                    {% else %}
+                        {% if is_following %}
+                            <button id="unfollow-btn"
+                                    class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange"
+                                    style="width:100px" data-post-id="{{ post.pk }}">Unfollow
+                            </button>
+                        {% else %}
+                            <button id="follow-btn"
+                                    class="w3-button w3-round-large w3-light-green w3-text-light-grey w3-hover-text-black w3-hover-light-green"
+                                    style="width:100px" data-post-id="{{ post.pk }}">Follow
+                            </button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
                 {% if post.image %}
                     <div class="w3-row" style="display: flex; align-items: stretch;">
                         <div class="w3-col s3" style="flex-shrink: 0;">
@@ -19,42 +36,97 @@
                             <p><strong>Status:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
                             <p><strong>Region:</strong> {{ post.get_region_display }}</p>
                             <p><strong>Published on:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
-                            <p><strong>Followers:</strong> {{ follower_count }}</p>
                         </div>
                     </div>
                 {% else %}
+                    <p><strong>Title:</strong> {{ post.title }}</p>
                     <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
                     <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
                     <p><strong>Status:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
                     <p><strong>Region:</strong> {{ post.get_region_display }}</p>
                     <p><strong>Published on:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
-                    <p><strong>Followers:</strong> {{ follower_count }}</p>
                 {% endif %}
-                <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Description: </strong>{{ post.description }}
+
+                <p style="word-wrap: break-word; white-space: pre-wrap;">
+                    <strong>Description: </strong>{{ post.description }}
                 </p>
-            </div>
-        </div>
 
-        <!-- Comments Section -->
-        <h3 class="w3-center">Comments</h3>
-
-        {% if comments %}
-            <div class="w3-row">
-                {% for comment in comments %}
-                    <div class="w3-card w3-margin w3-padding">
-                        <p><strong>{{ comment.user.username }}</strong> on {{ comment.pub_date|date:"d M, Y" }}</p>
-                        <p>{{ comment.comment }}</p>
+                <!-- Comments Section -->
+                <h3 class="w3-center">Comments</h3>
+                {% if comments %}
+                    <div class="w3-row">
+                        {% for comment in comments %}
+                            <div class="w3-card w3-margin w3-padding">
+                                <p><strong>{{ comment.user.username }}</strong> on {{ comment.pub_date|date:"d M, Y" }}
+                                </p>
+                                <p>{{ comment.comment }}</p>
+                                <!-- Show delete button if the current user is the post author -->
+                                {% if is_post_author %}
+                                    <form action="{% url 'delete comment' post.pk comment.pk %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit"
+                                                class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange">
+                                            Delete
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                {% else %}
+                    <p class="w3-center">No comments yet.</p>
+                {% endif %}
+
+                <div class="w3-container w3-padding">
+                    <h3>Add a Comment</h3>
+                    <form method="post" style="display: flex; align-items: center;">
+                        {% csrf_token %}
+                        <p style="flex-grow: 1; margin: 0;">
+                            {{ form.comment }} <!-- Render the comment input field -->
+                        </p>
+                        <button type="submit"
+                                class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
+                                style="margin-left: 10px;">Add
+                        </button>
+                    </form>
+                </div>
+
+                <div class="w3-center">
+                    <a href="{{ request.META.HTTP_REFERER|default:'/'|escape }}"
+                       class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Back</a>
+                    {% if post.user == request.user %}
+                        <a href="{% url 'edit post' post.pk %}"
+                           class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal">Edit</a>
+                    {% endif %}
+                </div>
             </div>
-        {% else %}
-            <p class="w3-center">No comments yet.</p>
-        {% endif %}
-        <div class="w3-center">
-            <a href="{% url 'user posts' %}"
-               class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Back</a>
-            <a href="{% url 'edit post' post.pk %}"
-               class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal">Edit</a>
         </div>
     </div>
+    
+    <script>
+        document.addEventListener('click', function (event) {
+            if (event.target && (event.target.id === 'follow-btn' || event.target.id === 'unfollow-btn')) {
+                let postId = event.target.getAttribute('data-post-id');
+                let url = event.target.id === 'follow-btn' ? `/post/${postId}/follow/` : `/post/${postId}/unfollow/`;
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json',
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'followed') {
+                            document.getElementById('follow-unfollow-btn').innerHTML =
+                                '<button id="unfollow-btn" class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange" style="width:100px" data-post-id="' + postId + '">Unfollow</button>';
+                        } else if (data.status === 'unfollowed') {
+                            document.getElementById('follow-unfollow-btn').innerHTML =
+                                '<button id="follow-btn" class="w3-button w3-round-large w3-light-green w3-text-light-grey w3-hover-text-black w3-hover-light-green" style="width:100px" data-post-id="' + postId + '">Follow</button>';
+                        }
+                    });
+            }
+        });
+    </script>
 {% endblock %}

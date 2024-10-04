@@ -15,4 +15,5 @@ class PostForm(forms.ModelForm):
             'contact_info': forms.TextInput(attrs={'class': 'w3-input', 'placeholder': 'Enter contact info (optional)'}),
             'image': forms.URLInput(attrs={'class': 'w3-input', 'placeholder': 'Image URL (optional)'}),
             'region': forms.Select(attrs={'class': 'w3-select'}),
+            'is_active': forms.Select(attrs={'class': 'w3-select'})
         }

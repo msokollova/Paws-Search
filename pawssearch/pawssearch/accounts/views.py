@@ -1,15 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth import views as auth_views, get_user_model, login, authenticate, logout
+from django.contrib.auth import views as auth_views, get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 from django.views.generic import ListView
 
 from pawssearch.accounts.forms import RegistrationForm, LogInForm, EditProfileForm, PasswordChangeForm
 from pawssearch.main.models import Follow
-from pawssearch.posts.models import Posts
 
 UserModel = get_user_model()
 
@@ -54,7 +51,6 @@ class DeleteProfileView(views.DeleteView):
     success_url = reverse_lazy('index')
 
     def get_queryset(self):
-        # Only allow deletion of the logged-in user's profile
         return UserModel.objects.filter(pk=self.request.user.pk)
 
 
@@ -74,7 +70,6 @@ class FollowedPostsListView(LoginRequiredMixin, ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        # Return all posts followed by the logged-in user
         return Follow.objects.filter(user=self.request.user).select_related('post')
 
 
