@@ -1,26 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2 class="w3-text-light-grey w3-center">All Active Posts</h2>
+    <h2 class="w3-text-light-grey w3-center w3-black">All Active Posts</h2>
 
-{% if active_posts %}
-    <div class="post-list">
-        {% for post in active_posts %}
-            <div class="w3-card-4 w3-round w3-light-grey w3-padding-large post">
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.description }}</p>
-                <p><strong>Pet Type:</strong> {{ post.pet_type }}</p>
-                <p><strong>Post Type:</strong> {{ post.post_type }}</p>
-                <p><strong>Contact Number:</strong> {{ post.contact_info }}</p>
-                <p><strong>Region:</strong> {{ post.region }}</p>
-                <p><small>Published on: {{ post.pub_date }}</small></p>
-                <a href="{% url 'detail post' post.pk %}" class="w3-button w3-round-large w3-teal">View Post</a>
-            </div>
-        {% endfor %}
-    </div>
+    {% if active_posts %}
+        <div class="post-list">
+            {% for post in active_posts %}
+                <div class="w3-card-4 w3-round w3-light-grey w3-padding-large post w3-margin-top">
+                    {% if post.image %}
+                        <div class="w3-row" style="display: flex; align-items: stretch;">
+                            <div class="w3-col s3" style="flex-shrink: 0;">
+                                <img src="{{ post.image }}" alt="post_photo" class="w3-round"
+                                     style="width:95%; height: 95%; object-fit: cover;">
+                            </div>
+                            <div class="w3-col s9" style="flex-grow: 1;">
+                                <h3>{{ post.title }}</h3>
+                                <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
+                                <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
+                                <p><strong>Region:</strong> {{ post.get_region_display }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <h3>{{ post.title }}</h3>
+                        <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
+                        <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
+                        <p><strong>Region:</strong> {{ post.get_region_display }}</p>
+                    {% endif %}
+                    <a href="{% url 'detail post' post.pk %}" class="w3-button w3-round-large w3-teal ">View Post</a>
+                </div>
+            {% endfor %}
+        </div>
 
-    {% if is_paginated %}
-        <div class="pagination">
+        {% if is_paginated %}
+            <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
                     <a href="?page=1">&laquo; first</a>
@@ -36,11 +48,11 @@
                     <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
                 {% endif %}
             </span>
-        </div>
-    {% endif %}
+            </div>
+        {% endif %}
 
-{% else %}
-    <p class="w3-text-grey">No active posts are available at the moment.</p>
-{% endif %}
+    {% else %}
+        <p class="w3-text-grey">No active posts are available at the moment.</p>
+    {% endif %}
 
 {% endblock %}

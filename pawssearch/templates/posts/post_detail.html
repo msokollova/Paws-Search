@@ -30,29 +30,32 @@
                                  style="width:95%; height: 95%; object-fit: cover;">
                         </div>
                         <div class="w3-col s9" style="flex-grow: 1;">
-                            <p><strong>Title:</strong> {{ post.title }}</p>
+                            <h3>{{ post.title }}</h3>
                             <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
                             <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
                             <p><strong>Status:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
                             <p><strong>Region:</strong> {{ post.get_region_display }}</p>
+                            {% if post.contact_info %}
+                                <p><strong>Contact Number:</strong> {{ post.contact_info }}</p>
+                            {% endif %}
+
                             <p><strong>Published on:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
                         </div>
                     </div>
                 {% else %}
-                    <p><strong>Title:</strong> {{ post.title }}</p>
+                    <h3>{{ post.title }}</h3>
                     <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
                     <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
                     <p><strong>Status:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
                     <p><strong>Region:</strong> {{ post.get_region_display }}</p>
+                    {% if post.contact_info %}
+                        <p><strong>Contact Number:</strong> {{ post.contact_info }}</p>
+                    {% endif %}
                     <p><strong>Published on:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
                 {% endif %}
 
-                <p style="word-wrap: break-word; white-space: pre-wrap;">
-                    <strong>Description: </strong>{{ post.description }}
-                </p>
-
-                <!-- Comments Section -->
-                <h3 class="w3-center">Comments</h3>
+                <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Description: </strong>{{ post.description }}</p>          
+                <h4>Comments</h4>
                 {% if comments %}
                     <div class="w3-row">
                         {% for comment in comments %}
@@ -60,7 +63,6 @@
                                 <p><strong>{{ comment.user.username }}</strong> on {{ comment.pub_date|date:"d M, Y" }}
                                 </p>
                                 <p>{{ comment.comment }}</p>
-                                <!-- Show delete button if the current user is the post author -->
                                 {% if is_post_author %}
                                     <form action="{% url 'delete comment' post.pk comment.pk %}" method="post">
                                         {% csrf_token %}
@@ -82,7 +84,7 @@
                     <form method="post" style="display: flex; align-items: center;">
                         {% csrf_token %}
                         <p style="flex-grow: 1; margin: 0;">
-                            {{ form.comment }} <!-- Render the comment input field -->
+                            {{ form.comment }}
                         </p>
                         <button type="submit"
                                 class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
@@ -92,8 +94,10 @@
                 </div>
 
                 <div class="w3-center">
-                    <a href="{{ request.META.HTTP_REFERER|default:'/'|escape }}"
-                       class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Back</a>
+                    <button id="back-btn"
+                            class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">
+                        Back
+                    </button>
                     {% if post.user == request.user %}
                         <a href="{% url 'edit post' post.pk %}"
                            class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal">Edit</a>
@@ -102,7 +106,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         document.addEventListener('click', function (event) {
             if (event.target && (event.target.id === 'follow-btn' || event.target.id === 'unfollow-btn')) {
@@ -126,6 +130,36 @@
                                 '<button id="follow-btn" class="w3-button w3-round-large w3-light-green w3-text-light-grey w3-hover-text-black w3-hover-light-green" style="width:100px" data-post-id="' + postId + '">Follow</button>';
                         }
                     });
+            }
+        });
+
+        // When the user lands on the detail post page
+        document.addEventListener("DOMContentLoaded", function () {
+            const referrer = document.referrer;  // Get the previous page URL
+
+            // Check if the referrer is either "all-active-posts" or "my-posts"
+            if (referrer.includes('all-active-posts')) {
+                sessionStorage.setItem('previousPage', '/posts/all-active-posts/');
+            } else if (referrer.includes('my-posts')) {
+                sessionStorage.setItem('previousPage', '/posts/my-posts/');
+            }
+        });
+
+        // Handle the back button functionality
+        const backButton = document.getElementById('back-btn');
+        backButton.addEventListener('click', function () {
+            // Retrieve the stored previous page URL from sessionStorage
+            const previousPage = sessionStorage.getItem('previousPage');
+
+            if (previousPage) {
+                // If a previous page is stored, redirect the user there
+                window.location.href = previousPage;
+
+                // Optionally clear the sessionStorage after navigation
+                sessionStorage.removeItem('previousPage');
+            } else {
+                // If no previous page is stored, default to "All Active Posts" page
+                window.location.href = '/posts/all-active-posts/';
             }
         });
     </script>

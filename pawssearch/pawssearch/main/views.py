@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import ListView
 
+from pawssearch.main.forms import CommentForm
 from pawssearch.main.models import Follow, Comment
 from pawssearch.posts.models import Posts
 
@@ -18,9 +19,7 @@ class FollowedPostsView(LoginRequiredMixin, ListView):
     context_object_name = 'followed_posts'
 
     def get_queryset(self):
-        # Get the current user
         user = self.request.user
-        # Return posts that are followed by the user and are active
         return Posts.objects.filter(follow__user=user, is_active=True).distinct()
 
 
@@ -45,6 +44,23 @@ class UnfollowPostView(LoginRequiredMixin, View):
             return JsonResponse({'status': 'unfollowed'})
         else:
             return JsonResponse({'status': 'not_following'})
+
+
+def add_comment(request, post_id):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = Posts.objects.get(pk=post_id)
+            comment.user = request.user
+            comment.save()
+            return JsonResponse({
+                'success': True,
+                'username': request.user.username,
+                'pub_date': comment.pub_date.strftime('%d %b, %Y'),
+                'comment': comment.comment
+            })
+        return JsonResponse({'success': False})
 
 
 def delete_comment(request, post_pk, comment_pk):
