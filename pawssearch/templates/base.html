@@ -13,25 +13,25 @@
 <body class="w3-light-grey">
 
 <!-- Navigation Bar -->
-<div class="w3-bar w3-border w3-black w3-padding">
+<div class="w3-bar w3-border w3-blue-gray w3-padding">
     <a class="w3-left logo-img" href="{% url 'index' %}">
         <img src="{% static 'images/logo-2.png' %}" alt="image">
     </a>
 
     {% if request.user.is_authenticated %}
         <a href="javascript:void(0)"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-blue w3-right w3-large"
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large"
            onclick="openSidebar()">Profile</a>
     {% else %}
         <a href="{% url 'login' %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Login</a>
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Login</a>
         <div id="login-modal-container"></div>
     {% endif %}
 
-    <a href="#"
-       class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Articles</a>
+    <a href="{% url 'all article' %}"
+       class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Articles</a>
     <a href="{% url 'all active posts' %}"
-       class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Posts</a>
+       class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Posts</a>
 </div>
 
 <!-- Page Content -->
@@ -43,9 +43,9 @@
 
 <!-- Sidebar (block the whole screen) -->
 {% if user.is_authenticated %}
-    <div class="w3-sidebar w3-bar-block w3-card w3-animate-right w3-black"
+    <div class="w3-sidebar w3-bar-block w3-card w3-animate-right w3-blue-gray"
          style="display:none; right:0; top:0; position:fixed; height:100%; width:250px; z-index:3;" id="mySidebar">
-        <button class="w3-bar-item w3-button w3-large w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-large w3-right"
+        <button class="w3-bar-item w3-button w3-large w3-hover-none w3-text-light-grey w3-hover-text-black w3-large w3-right"
                 onclick="closeSidebar()"> &times;
         </button>
         <div class="w3-bar-item w3-text-light-grey w3-center w3-border-bottom">
@@ -54,36 +54,36 @@
                 <img src="{{ request.user.profile_picture }} " alt="Avatar" class="w3-circle"
                      style="width:50%">
             {% else %}
-                <img src="{% static 'images/img_avatar.jpg' %} " alt="Avatar" class="w3-circle"
+                <img src="{% static 'images/img_avatar.jpg' %}" alt="Avatar" class="w3-circle"
                      style="width:50%">
             {% endif %}
 
             <p class="w3-large">Hello, {{ request.user.full_name }}</p>
         </div>
         <a href="{% url 'create post' %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Create
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Create
             a
             post</a>
         <a href="{% url 'user posts' %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">My
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">My
             posts</a>
         <a href="{% url 'followed posts' %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Followed
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Followed
             posts</a>
         <a href="{% url 'edit profile' request.user.pk %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Edit
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Edit
             profile</a>
         <a href="{% url 'change password' request.user.pk %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">Change
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">Change
             password</a>
         <a href="{% url 'delete profile' request.user.pk %}"
-           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">
+           class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">
             Delete profile
         </a>
         <form action="{% url 'logout' %}" method="post" style="display:inline;">
             {% csrf_token %}
             <button type="submit"
-                    class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-light-blue w3-right w3-large">
+                    class="w3-bar-item w3-button w3-hover-none w3-text-light-grey w3-hover-text-black w3-right w3-large">
                 Logout
             </button>
         </form>
@@ -94,6 +94,10 @@
 
 <!-- Overlay -->
 <div id="myOverlay" class="w3-overlay" style="display:none; z-index:2;" onclick="closeSidebar()"></div>
+
+<footer class="w3-container w3-center w3-margin-top w3-blue-gray w3-padding-large">
+  <p></p>
+</footer>
 
 <script src="{% static 'scripts/functions.js' %}"></script>
 </body>

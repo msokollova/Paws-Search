@@ -8,20 +8,14 @@ class Article(models.Model):
         blank=False,
     )
 
-    description = models.TextField(
-        null=False,
-        blank=False,
-    )
-
     url = models.URLField(
         null=False,
         blank=False,
     )
 
-    image = models.ImageField(
+    image = models.URLField(
         null=True,
         blank=True,
-        upload_to='static/article/images/'
     )
 
     pub_date = models.DateField(
