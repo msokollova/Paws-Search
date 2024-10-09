@@ -1,5 +1,37 @@
-html {
-    scroll-behavior: smooth;
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: "JetBrains Mono", cursive;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    padding-top: 65px;
+}
+
+main {
+    flex: 1;
+}
+
+main > h2 {
+    font-family: "JetBrains Mono", cursive;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.w3-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .logo-img > img {
@@ -10,16 +42,16 @@ main > .auth_form {
     padding: 16px;
     align-content: center;
     width: 40%;
+    font-family: "JetBrains Mono", cursive;
 }
 
 main > .other_form {
     width: 100%;
-
+    font-family: "JetBrains Mono", cursive;
 }
 
 form > h2 {
-    background: black;
-
+    font-family: "JetBrains Mono", cursive;
 }
 
 form > input {
@@ -30,6 +62,31 @@ form > input {
     margin: 20px 0;
 }
 
+.homepage {
+    background-image: url("../images/SL-011023-55240-04.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage > div > h1, p, i {
+    font-family: "JetBrains Mono", cursive;
+}
+
+body > main > div > div > p > i > b {
+    font-family: "JetBrains Mono", cursive;
+}
 
 
+.w3-sidebar {
+    z-index: 1001;
+}
 
+.w3-overlay {
+    z-index: 1000;
+}

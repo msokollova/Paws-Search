@@ -5,7 +5,7 @@
         <script type="text/javascript">window.location.href = "{% url 'index' %}";</script>
     {% else %}
         <form class="w3-card-4 w3-round w3-display-middle w3-light-grey auth_form" method="post" action="{% url 'register' %}">
-            <h2 class="w3-text-light-grey w3-center">Sign Up</h2>
+            <h2 class="w3-text-blue-gray w3-center">Sign Up</h2>
 
             {% csrf_token %}
             <p>
