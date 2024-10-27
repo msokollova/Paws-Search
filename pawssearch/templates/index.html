@@ -2,14 +2,15 @@
 {% load static %}
 
 {% block content %}
-    <div class="w3-container homepage">
-
-
-        <div class="w3-panel w3-card-4 w3-center" style="width:50%">
+    <div class="w3-display-container homepage">
+        <img src="{% static 'images/SL-011023-55240-04.jpg' %}" alt="background" class="w3-opacity-min homepage-bg">
+        
+        <div class="w3-panel w3-card-4 w3-center w3-display-middle" style="width:50%">
             <p class="w3-xxxlarge"><b>Добре дошли</b></p>
             <span style="font-size:100px">&#10077;</span><br>
             <p style="margin-top:-60px">
-                <p class="w3-large"><b>Животните са много добри приятели, те не задават въпроси, не критикуват. <br>- Джордж Елиът</b></p></p>
+            <p class="w3-large"><b>Животните са много добри приятели, те не задават въпроси, не критикуват. <br>-
+                Джордж Елиът</b></p></p>
         </div>
     </div>
 {% endblock %}

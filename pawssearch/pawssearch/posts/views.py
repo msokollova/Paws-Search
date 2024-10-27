@@ -5,7 +5,7 @@ from django.views.generic import DetailView, UpdateView, DeleteView, ListView
 from django.views.generic.edit import CreateView
 
 from .forms import PostForm
-from .models import Posts
+from .models import Posts, Pets, PostTypes, Regions
 from ..main.forms import CommentForm
 from ..main.models import Comment, Follow
 
@@ -103,4 +103,34 @@ class AllActivePostsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Posts.objects.filter(is_active=True).order_by('-pub_date')
+        queryset = Posts.objects.filter(is_active=True).order_by('-pub_date')
+
+        # Capture filter parameters
+        pet_type = self.request.GET.get('pet_type')
+        post_type = self.request.GET.get('post_type')
+        region = self.request.GET.get('region')
+
+        # Apply filters based on parameters
+        if pet_type:
+            queryset = queryset.filter(pet_type=pet_type)
+        if post_type:
+            queryset = queryset.filter(post_type=post_type)
+        if region:
+            queryset = queryset.filter(region=region)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Providing choices to the context
+        context['pet_types'] = Pets.choices()
+        context['post_types'] = PostTypes.choices()
+        context['regions'] = Regions.choices()
+
+        # Current selections
+        context['current_pet_type'] = self.request.GET.get('pet_type', '')
+        context['current_post_type'] = self.request.GET.get('post_type', '')
+        context['current_region'] = self.request.GET.get('region', '')
+
+        return context

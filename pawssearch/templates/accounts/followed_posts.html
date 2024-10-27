@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h2 class="w3-text-blue-gray w3-center">Followed Posts</h2>
+    <h2 class="w3-text-blue-gray w3-center">Последвани публикации</h2>
 
     {% if followed_posts %}
         <table class="w3-table w3-card-4 w3-padding w3-margin">
             <tr class="w3-blue-grey">
-                <th class="w3-center">Title</th>
-                <th class="w3-center">Type</th>
-                <th class="w3-center">Status</th>
-                <th class="w3-center">Details</th>
-                <th class="w3-center">Unfollow</th>
+                <th class="w3-center">Заглавие</th>
+                <th class="w3-center">Тип на обява</th>
+                <th class="w3-center">Статус</th>
+                <th class="w3-center">Детайли</th>
+                <th class="w3-center">Не следвай</th>
             </tr>
             {% for post in followed_posts %}
                 <tr id="post-row-{{ post.pk }}">
                     <td class="w3-center">{{ post.title }}</td>
                     <td class="w3-center">{{ post.get_post_type_display }}</td>
-                    <td class="w3-center">{% if post.is_active %}Active{% else %}Inactive{% endif %}</td>
+                    <td class="w3-center">{% if post.is_active %}Активна{% else %}Не активна{% endif %}</td>
                     <td class="w3-center">
                         <a href="{% url 'detail post' post.pk %}"
-                           class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">View</a>
+                           class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Преглед</a>
                     </td>
                     <td class="w3-center">
                         <button onclick="unfollowPost('{{ post.pk }}', this)"
                                 class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange">
-                            Unfollow
+                            Не следвай
                         </button>
                     </td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
-        <p class="w3-text-grey w3-center">You are not following any posts.</p>
+        <p class="w3-text-grey w3-center">Все още не следвате публикации.</p>
     {% endif %}
 
     <script>
@@ -60,7 +60,7 @@
                         if (rows === 1) {
                             document.querySelector('table').remove();
                             const h2 = document.querySelector('h2');
-                            h2.insertAdjacentHTML('afterend', '<p class="w3-text-grey w3-center">You are not following any posts.</p>');
+                            h2.insertAdjacentHTML('afterend', '<p class="w3-text-grey w3-center">Все още не следвате публикации.</p>');
                         }
                     } else {
                         alert('Error: Could not unfollow the post.');

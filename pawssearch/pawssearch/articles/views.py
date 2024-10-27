@@ -26,7 +26,7 @@ def article_add(request):
             return redirect('all article')
     else:
         form = ArticleForm()
-    return render(request, 'article/form_article.html', {'form': form, 'action': 'Add'})
+    return render(request, 'article/form_article.html', {'form': form, 'action': 'Добави'})
 
 
 # Edit existing article (staff only)
@@ -40,7 +40,7 @@ def article_edit(request, pk):
             return redirect('all article')
     else:
         form = ArticleForm(instance=article)
-    return render(request, 'article/form_article.html', {'form': form, 'action': 'Edit'})
+    return render(request, 'article/form_article.html', {'form': form, 'action': 'Редактиране'})
 
 
 # Delete an article (staff only)

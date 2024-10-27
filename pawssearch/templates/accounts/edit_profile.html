@@ -5,12 +5,12 @@
     {% if user.is_authenticated %}
         <form class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post"
               action="{% url 'edit profile' request.user.pk %}">
-            <h2 class="w3-text-blue-gray w3-center">Edit Profile</h2>
+            <h2 class="w3-text-blue-gray w3-center">Редактиране на профил</h2>
 
             {% csrf_token %}
 
             <p>
-                <label class="w3-text-black"><b>First Name</b></label><br>
+                <label class="w3-text-black"><b>Име</b></label><br>
                 <input class="w3-input w3-border w3-light-grey" type="text" name="first_name"
                        value="{{ form.first_name.value|default_if_none:'' }}" placeholder="First Name">
                 {% if form.first_name.errors %}
@@ -21,7 +21,7 @@
             </p>
 
             <p>
-                <label class="w3-text-black"><b>Last Name</b></label><br>
+                <label class="w3-text-black"><b>Фамилия</b></label><br>
                 <input class="w3-input w3-border w3-light-grey" type="text" name="last_name"
                        value="{{ form.last_name.value|default_if_none:'' }}" placeholder="Last Name">
                 {% if form.last_name.errors %}
@@ -53,8 +53,8 @@
                 {% endif %}
             </p>
             <div class="w3-center">
-                <button class="w3-button w3-round-large w3-black w3-text-light-grey w3-hover-text-light-blue w3-hover-black w3-large"
-                        type="submit">Save Changes
+                <button class="w3-button w3-round-large w3-blue-gray w3-text-light-grey w3-hover-text-black w3-hover-blue-gray"
+                        type="submit">Запази
                 </button>
             </div>
         </form>

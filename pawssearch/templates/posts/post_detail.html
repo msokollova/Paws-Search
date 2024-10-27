@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2 class="w3-text-blue-gray w3-center w3-margin h2">Details</h2>
+    <h2 class="w3-text-blue-gray w3-center w3-margin h2">Детайли</h2>
     <div class="w3-container other_form">
         <div class="w3-card-4">
             <div class="w3-container w3-padding w3-round w3-margin">
                 <div id="follow-unfollow-btn" class="w3-container w3-padding w3-right">
                     {% if is_post_author %}
-                        <p><strong>Followers:</strong> {{ follower_count }}</p>
+                        <p><strong>Последователи:</strong> {{ follower_count }}</p>
                     {% else %}
                         {% if is_following %}
                             <button id="unfollow-btn"
                                     class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange"
-                                    style="width:100px" data-post-id="{{ post.pk }}">Unfollow
+                                    style="width:110px" data-post-id="{{ post.pk }}">Не следвай
                             </button>
                         {% else %}
                             <button id="follow-btn"
                                     class="w3-button w3-round-large w3-light-green w3-text-light-grey w3-hover-text-black w3-hover-light-green"
-                                    style="width:100px" data-post-id="{{ post.pk }}">Follow
+                                    style="width:110px" data-post-id="{{ post.pk }}">Следвай
                             </button>
                         {% endif %}
                     {% endif %}
@@ -31,31 +31,31 @@
                         </div>
                         <div class="w3-col s9" style="flex-grow: 1;">
                             <h3>{{ post.title }}</h3>
-                            <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
-                            <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
-                            <p><strong>Status:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
-                            <p><strong>Region:</strong> {{ post.get_region_display }}</p>
+                            <p><strong>Животно:</strong> {{ post.get_pet_type_display }}</p>
+                            <p><strong>Тип на обява:</strong> {{ post.get_post_type_display }}</p>
+                            <p><strong>Статус:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
+                            <p><strong>Регион:</strong> {{ post.get_region_display }}</p>
                             {% if post.contact_info %}
-                                <p><strong>Contact Number:</strong> {{ post.contact_info }}</p>
+                                <p><strong>Телефон за връзка:</strong> {{ post.contact_info }}</p>
                             {% endif %}
 
-                            <p><strong>Published on:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
+                            <p><strong>Публикувана на:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
                         </div>
                     </div>
                 {% else %}
                     <h3>{{ post.title }}</h3>
-                    <p><strong>Pet:</strong> {{ post.get_pet_type_display }}</p>
-                    <p><strong>Type:</strong> {{ post.get_post_type_display }}</p>
-                    <p><strong>Status:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
-                    <p><strong>Region:</strong> {{ post.get_region_display }}</p>
+                    <p><strong>Животно:</strong> {{ post.get_pet_type_display }}</p>
+                    <p><strong>Тип на обява:</strong> {{ post.get_post_type_display }}</p>
+                    <p><strong>Статус:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
+                    <p><strong>Регион:</strong> {{ post.get_region_display }}</p>
                     {% if post.contact_info %}
-                        <p><strong>Contact Number:</strong> {{ post.contact_info }}</p>
+                        <p><strong>Телефон за връзка:ж</strong> {{ post.contact_info }}</p>
                     {% endif %}
-                    <p><strong>Published on:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
+                    <p><strong>Публикувана на:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
                 {% endif %}
 
-                <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Description: </strong>{{ post.description }}</p>          
-                <h4>Comments</h4>
+                <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Описание: </strong>{{ post.description }}</p>          
+                <h4>Коментари</h4>
                 {% if comments %}
                     <div class="w3-row">
                         {% for comment in comments %}
@@ -76,11 +76,11 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    <p class="w3-center">No comments yet.</p>
+                    <p class="w3-center">Все още няма коментари.</p>
                 {% endif %}
 
                 <div class="w3-container w3-padding">
-                    <h4>Add a Comment</h4>
+                    <h4>Добави коментар</h4>
                     <form method="post" style="display: flex; align-items: center;">
                         {% csrf_token %}
                         <p style="flex-grow: 1; margin: 0;">
@@ -88,7 +88,7 @@
                         </p>
                         <button type="submit"
                                 class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
-                                style="margin-left: 10px;">Add
+                                style="margin-left: 10px;">Добави
                         </button>
                     </form>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="w3-center">
                     <button id="back-btn"
                             class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan" style="width:20%">
-                        Back
+                        Назад
                     </button>
                     {% if post.user == request.user %}
                         <a href="{% url 'edit post' post.pk %}"
@@ -124,10 +124,10 @@
                     .then(data => {
                         if (data.status === 'followed') {
                             document.getElementById('follow-unfollow-btn').innerHTML =
-                                '<button id="unfollow-btn" class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange" style="width:100px" data-post-id="' + postId + '">Unfollow</button>';
+                                '<button id="unfollow-btn" class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange" style="width:110px" data-post-id="' + postId + '">Не следвай</button>';
                         } else if (data.status === 'unfollowed') {
                             document.getElementById('follow-unfollow-btn').innerHTML =
-                                '<button id="follow-btn" class="w3-button w3-round-large w3-light-green w3-text-light-grey w3-hover-text-black w3-hover-light-green" style="width:100px" data-post-id="' + postId + '">Follow</button>';
+                                '<button id="follow-btn" class="w3-button w3-round-large w3-light-green w3-text-light-grey w3-hover-text-black w3-hover-light-green" style="width:110px" data-post-id="' + postId + '">Следвай</button>';
                         }
                     });
             }

@@ -2,11 +2,11 @@
 
 {% block content %}
     <form method="post" class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form">
-    <h2 class="w3-center w3-text-blue-gray">{{ action }} Article</h2>
+    <h2 class="w3-center w3-text-blue-gray">{{ action }} Статия</h2>
     {% csrf_token %}
 
     <p>
-        <label class="w3-text-black"><b>Title</b></label><br>
+        <label class="w3-text-black"><b>Заглавие</b></label><br>
         {{ form.title }}
         {% if form.title.errors %}
             {% for error in form.title.errors %}
@@ -15,7 +15,7 @@
         {% endif %}
     </p>
     <p>
-        <label class="w3-text-black"><b>Article URL</b></label><br>
+        <label class="w3-text-black"><b>URL адрес</b></label><br>
         {{ form.url }}
         {% if form.url.errors %}
             {% for error in form.url.errors %}
@@ -24,7 +24,7 @@
         {% endif %}
     </p>
     <p>
-        <label class="w3-text-black"><b>Image URL</b></label><br>
+        <label class="w3-text-black"><b>URL снимка</b></label><br>
         {{ form.image }}
         {% if form.image.errors %}
             {% for error in form.image.errors %}
@@ -36,11 +36,11 @@
     <div class="w3-center">
         <a href="{% url 'all article' %}"
            class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan"
-           style="width:20%">Cancel</a>
+           style="width:20%">Отказ</a>
         <button type="submit"
                 class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
                 style="width:20%">
-            Save
+            Запази
         </button>
     </div>
     </form>

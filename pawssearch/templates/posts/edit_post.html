@@ -4,11 +4,11 @@
     <form class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post"
           action="{% url 'edit post' pk=posts.pk %}">
 
-        <h2 class="w3-text-blue-gray w3-center">Edit Post</h2>
+        <h2 class="w3-text-blue-gray w3-center">Редактиране на публикация</h2>
 
         {% csrf_token %}
         <p>
-            <label class="w3-text-black"><b>Title</b></label><br>
+            <label class="w3-text-black"><b>Заглавие</b></label><br>
             {{ form.title }}
             {% if form.title.errors %}
                 {% for error in form.title.errors %}
@@ -18,7 +18,7 @@
         </p>
 
         <p>
-            <label class="w3-text-black"><b>Description</b></label><br>
+            <label class="w3-text-black"><b>Описание</b></label><br>
             {{ form.description }}
             {% if form.description.errors %}
                 {% for error in form.description.errors %}
@@ -28,7 +28,7 @@
         </p>
 
         <p>
-            <label class="w3-text-black"><b>Pet</b></label><br>
+            <label class="w3-text-black"><b>Животно</b></label><br>
             {{ form.pet_type }}
             {% if form.pet_type.errors %}
                 {% for error in form.pet_type.errors %}
@@ -38,7 +38,7 @@
         </p>
 
         <p>
-            <label class="w3-text-black"><b>Post Type</b></label><br>
+            <label class="w3-text-black"><b>Тип на обява</b></label><br>
             {{ form.post_type }}
             {% if form.post_type.errors %}
                 {% for error in form.post_type.errors %}
@@ -48,7 +48,7 @@
         </p>
 
         <p>
-            <label class="w3-text-black"><b>Contact Number</b></label><br>
+            <label class="w3-text-black"><b>Телефон за връзка</b></label><br>
             {{ form.contact_info }}
             {% if form.contact_info.errors %}
                 {% for error in form.contact_info.errors %}
@@ -58,7 +58,7 @@
         </p>
 
         <p>
-            <label class="w3-text-black"><b>Image URL</b></label><br>
+            <label class="w3-text-black"><b>URL снимка</b></label><br>
             {{ form.image }}
             {% if form.image.errors %}
                 {% for error in form.image.errors %}
@@ -67,7 +67,7 @@
             {% endif %}
         </p>
         <p>
-            <label class="w3-text-black"><b>Region</b></label><br>
+            <label class="w3-text-black"><b>Регион</b></label><br>
             {{ form.region }}
             {% if form.region.errors %}
                 {% for error in form.region.errors %}
@@ -76,17 +76,17 @@
             {% endif %}
         </p>
         <p>
-            <label class="w3-text-black"><b>Status</b></label><br>
+            <label class="w3-text-black"><b>Статус</b></label><br>
             <select name="is_active" class="w3-select">
-                <option value="True" {% if form.instance.is_active %}selected{% endif %}>Active</option>
-                <option value="False" {% if not form.instance.is_active %}selected{% endif %}>Inactive</option>
+                <option value="True" {% if form.instance.is_active %}selected{% endif %}>Активна</option>
+                <option value="False" {% if not form.instance.is_active %}selected{% endif %}>Неактивна</option>
             </select>
         </p>
         <div class="w3-center">
             <a href="{% url 'user posts' %}"
-               class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Back</a>
+               class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Назад</a>
             <button class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
-                    type="submit">Save
+                    type="submit">Запази
             </button>
         </div>
     </form>

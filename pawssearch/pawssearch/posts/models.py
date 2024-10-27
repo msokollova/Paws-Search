@@ -19,9 +19,9 @@ def image_url_validator(value):
 
 
 class Pets(Enum):
-    CAT = 'Cat'
-    DOG = 'Dog'
-    OTHER = 'Other'
+    CAT = 'Котка'
+    DOG = 'Куче'
+    OTHER = 'Друго'
 
     @classmethod
     def choices(cls):
@@ -29,10 +29,10 @@ class Pets(Enum):
 
 
 class PostTypes(Enum):
-    FOUND = 'Found'
-    MISSING = 'Missing'
-    FOR_ADOPTION = 'For Adoption'
-    FOR_SELLING = 'For Selling'
+    FOUND = 'Намерено'
+    MISSING = 'Изгубено'
+    FOR_ADOPTION = 'За осиновяване'
+    FOR_SELLING = 'За продажба'
 
     @classmethod
     def choices(cls):
@@ -40,34 +40,34 @@ class PostTypes(Enum):
 
 
 class Regions(Enum):
-    BLAGOEVGRAD = 'Blagoevgrad'
-    BURGAS = 'Burgas'
-    VARNA = 'Varna'
-    VELIKO_TARNOVO = 'Veliko Turnovo'
-    VIDIN = 'Vidin'
-    VRATSA = 'Vratsa'
-    GABROVO = 'Gabrovo'
-    DOBRICH = 'Dobrich'
-    KARDZHALI = 'Kurdzhali'
-    KYUSTENDIL = 'Kyustendil'
-    LOVECH = 'Lovech'
-    MONTANA = 'Montana'
-    PAZARDZHIK = 'Pazardzhik'
-    PERNIK = 'Pernik'
-    PLEVEN = 'Pleven'
-    PLOVDIV = 'Plovdiv'
-    RAZGRAD = 'Razgrad'
-    RUSSE = 'Ruse'
-    SILISTRA = 'Silistra'
-    SLIVEN = 'Sliven'
-    SMOLYAN = 'Smolyan'
-    SOFIA = 'Sofia - city'
-    SOFIA_OBLAST = 'Sofia - region'
-    STARA_ZAGORA = 'Stara Zagora'
-    TARGOVISHTE = 'Turgovishte'
-    HASKOVO = 'Haskovo'
-    SHUMEN = 'Shumen'
-    YAMBOL = 'Yambol'
+    BLAGOEVGRAD = 'Благоевград'
+    BURGAS = 'Бургас'
+    VARNA = 'Варна'
+    VELIKO_TARNOVO = 'Велико Търново'
+    VIDIN = 'Видин'
+    VRATSA = 'Враца'
+    GABROVO = 'Габрово'
+    DOBRICH = 'Добрич'
+    KARDZHALI = 'Кърджали'
+    KYUSTENDIL = 'Кюстендил'
+    LOVECH = 'Ловеч'
+    MONTANA = 'Монтана'
+    PAZARDZHIK = 'Пазарджик'
+    PERNIK = 'Перник'
+    PLEVEN = 'Плевен'
+    PLOVDIV = 'Пловдив'
+    RAZGRAD = 'Разград'
+    RUSSE = 'Русе'
+    SILISTRA = 'Силистра'
+    SLIVEN = 'Сливен'
+    SMOLYAN = 'Смолян'
+    SOFIA = 'София - град'
+    SOFIA_OBLAST = 'София - регион'
+    STARA_ZAGORA = 'Стара Загарора'
+    TARGOVISHTE = 'Търговище'
+    HASKOVO = 'Хасково'
+    SHUMEN = 'Шумен'
+    YAMBOL = 'Ямбол'
 
     @classmethod
     def choices(cls):

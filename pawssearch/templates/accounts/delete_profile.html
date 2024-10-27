@@ -6,18 +6,18 @@
         <form class="w3-card-4 w3-round w3-display-middle w3-text-blue-gray auth_form" method="post"
               action="{% url 'delete profile' user.pk %}">
             {% csrf_token %}
-            <h2 class="w3-center">Are you sure you want to delete your profile?</h2>
+            <h2 class="w3-center">Сигурни ли сте, че искате за изтриете Вашия профил?</h2>
             <p class="w3-text-black w3-center">
-                Please, have in mind that if you delete your profile, all your posts will be deleted too!
+                Моля, имайте предвид че ако изтриете профила си, всички ваши публикации също ще бъдат изтрити!
             </p>
             <div class="w3-center">
                 <a class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan"
                    style="width:20%"
-                   href="{{ request.META.HTTP_REFERER|default:'/'|escape }}">Cancel</a>
+                   href="{{ request.META.HTTP_REFERER|default:'/'|escape }}">Отказ</a>
                 <button type="submit"
                         class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
                         style="width:20%">
-                    Yes
+                    Да
                 </button>
             </div>
         </form>
