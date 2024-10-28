@@ -1,4 +1,7 @@
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -72,3 +75,27 @@ def delete_comment(request, post_pk, comment_pk):
         return redirect('detail post', pk=post.pk)
 
     return redirect('detail post', pk=post.pk)
+
+
+@login_required
+def submit_testimonial(request):
+    if request.method == 'POST':
+        testimonial = request.POST.get('testimonial', '')
+
+        # Get the user's email
+        user_email = request.user.email
+        if user_email:
+            # Send the testimonial email
+            send_mail(
+                subject='New User Testimonial',
+                message=testimonial,
+                from_email=user_email,
+                recipient_list=['mimsun2@gmail.com'],
+            )
+            messages.success(request, 'Thank you for submitting your testimonial!')
+        else:
+            messages.error(request, 'You need a valid email address to submit a testimonial.')
+
+        return redirect('index')
+
+    return redirect('index')

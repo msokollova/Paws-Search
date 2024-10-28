@@ -8,4 +8,5 @@ urlpatterns = [
     path('post/<int:post_pk>/comment/<int:comment_pk>/delete/', views.delete_comment, name='delete comment'),
     path('post/<int:pk>/follow/', FollowPostView.as_view(), name='follow post'),
     path('post/<int:pk>/unfollow/', UnfollowPostView.as_view(), name='unfollow post'),
+    path('submit-testimonial/', views.submit_testimonial, name='submit_testimonial'),
 ]

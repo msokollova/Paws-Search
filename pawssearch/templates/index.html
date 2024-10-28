@@ -2,15 +2,84 @@
 {% load static %}
 
 {% block content %}
-    <div class="w3-display-container homepage">
-        <img src="{% static 'images/SL-011023-55240-04.jpg' %}" alt="background" class="w3-opacity-min homepage-bg">
-        
-        <div class="w3-panel w3-card-4 w3-center w3-display-middle" style="width:50%">
-            <p class="w3-xxxlarge"><b>Добре дошли</b></p>
-            <span style="font-size:100px">&#10077;</span><br>
-            <p style="margin-top:-60px">
-            <p class="w3-large"><b>Животните са много добри приятели, те не задават въпроси, не критикуват. <br>-
-                Джордж Елиът</b></p></p>
+    <div class="w3-equal-height"
+         style="display: flex; flex-direction: column; flex-wrap: wrap; align-content: center; justify-content: center; align-items: stretch; width: 100%;">
+
+        <!-- Section 1: Quote with Background Image -->
+        <div class="w3-third w3-display-container"
+             style="display: flex; align-items: center; justify-content: center; background-image: url('{% static 'images/section1.jpg' %}'); background-size: cover; color: white; height: 550px; width: 100%">
+            <div class="w3-center">
+                <span style="font-size:100px">&#10077;</span><br>
+                <p class="w3-xlarge">
+                    <b>Животните са много добри приятели, те не задават въпроси, не критикуват. <br>- Джордж Елиът</b>
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 2: Testimonials -->
+        <div class="w3-third w3-light-grey"
+             style="display: flex; align-items: center; justify-content: center; padding: 20px;width: 100%">
+            <div class="w3-center" style="width: 100%;">
+                <h2 class="w3-text-blue-gray">Какво казват нашите потребители:</h2>
+                <div class="testimonials-container">
+                    <div class="testimonial">
+                        <p>"Тук намерих нов приятел, благодаря на PawsSearch!"</p>
+                        <p class="author">- Иван</p>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Отлично място за свързване с любители на животни."</p>
+                        <p class="author">- Мария</p>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Благодаря на PawsSearch, че ми помогна да намеря дом за моя любимец!"</p>
+                        <p class="author">- Георги</p>
+                    </div>
+                </div>
+
+
+                <!-- Testimonial Input Form -->
+                {% if user.is_authenticated %}
+                    <div class="w3-margin-top">
+                    <form action="{% url 'submit_testimonial' %}" method="post">
+                        {% csrf_token %}
+                        <label for="testimonial" class="w3-large">Споделете вашето мнение:</label>
+                        <input type="text" name="testimonial" id="testimonial" class="w3-input w3-border w3-round-large"
+                               style="margin-top: 10px;" placeholder="Вашето мнение...">
+                        <button type="submit" class="w3-button w3-teal w3-round-large w3-margin-top">Изпрати</button>
+                    </form>
+                {% else %}
+                    <p>Ако и Вие искате да споделите с нас какво мислите, моля <a href="{% url 'login' %}">влезте</a> в
+                        профила си.</p>
+                {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 3: Buttons for Articles and Active Posts -->
+        <div class="w3-third w3-light-grey"
+             style="display: flex; align-items: center; justify-content: center; background-color: #f5f5f5; width: 100%">
+            <div class="w3-center">
+                <h2 class="w3-text-blue-gray">Открийте още:</h2>
+                <div style="display: flex; flex-direction: row">
+                    <div class="w3-display-container">
+                        <a href="{% url 'all active posts' %}">
+                            <img src="{% static 'images/posts_button.png' %}" alt="Articles"
+                                 class="w3-image w3-round-large w3-hover-opacity"
+                                 style="width:80%; max-width:300px; margin:10px;">
+                        </a>
+                        <div class="w3-container w3-xlarge w3-text-blue-gray">Публикации</div>
+                    </div>
+                    <div class="w3-display-container">
+                        <a href="{% url 'all article' %}">
+                            <img src="{% static 'images/articles_button.png' %}" alt="Articles"
+                                 class="w3-image w3-round-large w3-hover-opacity"
+                                 style="width:80%; max-width:300px; margin:10px;">
+                        </a>
+                        <div class=" w3-container w3-xlarge w3-text-blue-gray">Статии</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

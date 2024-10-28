@@ -54,23 +54,9 @@ form > input {
     margin: 20px 0;
 }
 
-
-.homepage {
-    min-height: calc(100vh - 130px);
-    width: 100vw;
-    position: relative;
-    overflow: hidden;
+body > main > div > div.w3-third.w3-display-container > div{
+    margin-left: 400px;
 }
-
-.homepage-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
 
 .homepage > div > h1, p, i {
     font-family: "JetBrains Mono", cursive;
@@ -78,6 +64,34 @@ form > input {
 
 body > main > div > div > p > i > b {
     font-family: "JetBrains Mono", cursive;
+}
+
+.testimonials-container {
+    display: flex;
+    flex-wrap: wrap; /* Wraps testimonials to new lines */
+    gap: 30px; /* Space between testimonials */
+    justify-content: center; /* Centers testimonials in the container */
+    width: 100%;
+}
+
+.testimonial {
+    width: 300px; /* Fixed width for equal size */
+    height: 200px; /* Fixed height for equal size */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto; /* Adds scroll if text overflows */
+}
+
+.author {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
 }
 
 
