@@ -4,8 +4,7 @@
 {% block content %}
     <div class="w3-equal-height"
          style="display: flex; flex-direction: column; flex-wrap: wrap; align-content: center; justify-content: center; align-items: stretch; width: 100%;">
-
-        <!-- Section 1: Quote with Background Image -->
+    
         <div class="w3-third w3-display-container"
              style="display: flex; align-items: center; justify-content: center; background-image: url('{% static 'images/section1.jpg' %}'); background-size: cover; color: white; height: 550px; width: 100%">
             <div class="w3-center">
@@ -16,7 +15,6 @@
             </div>
         </div>
 
-        <!-- Section 2: Testimonials -->
         <div class="w3-third w3-light-grey"
              style="display: flex; align-items: center; justify-content: center; padding: 20px;width: 100%">
             <div class="w3-center" style="width: 100%;">
@@ -37,15 +35,14 @@
                 </div>
 
 
-                <!-- Testimonial Input Form -->
                 {% if user.is_authenticated %}
                     <div class="w3-margin-top">
                     <form action="{% url 'submit_testimonial' %}" method="post">
                         {% csrf_token %}
                         <label for="testimonial" class="w3-large">Споделете вашето мнение:</label>
                         <input type="text" name="testimonial" id="testimonial" class="w3-input w3-border w3-round-large"
-                               style="margin-top: 10px;" placeholder="Вашето мнение...">
-                        <button type="submit" class="w3-button w3-teal w3-round-large w3-margin-top">Изпрати</button>
+                               style="margin-top: 10px" placeholder="Вашето мнение...">
+                        <button type="submit" class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal w3-margin-top">Изпрати</button>
                     </form>
                 {% else %}
                     <p>Ако и Вие искате да споделите с нас какво мислите, моля <a href="{% url 'login' %}">влезте</a> в
@@ -56,7 +53,6 @@
             </div>
         </div>
 
-        <!-- Section 3: Buttons for Articles and Active Posts -->
         <div class="w3-third w3-light-grey"
              style="display: flex; align-items: center; justify-content: center; background-color: #f5f5f5; width: 100%">
             <div class="w3-center">
