@@ -15,7 +15,7 @@ def image_url_validator(value):
         try:
             url_validator(value)
         except ValidationError:
-            raise ValidationError(_('Enter a valid URL starting with "http://" or "https://".'), code='invalid_url')
+            raise ValidationError(_('Въведете валиден URL адес, започващ с "http://" или "https://".'), code='invalid_url')
 
 
 class Pets(Enum):

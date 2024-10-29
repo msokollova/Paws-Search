@@ -4,13 +4,13 @@
 {% block content %}
     <div class="w3-equal-height"
          style="display: flex; flex-direction: column; flex-wrap: wrap; align-content: center; justify-content: center; align-items: stretch; width: 100%;">
-    
+
         <div class="w3-third w3-display-container"
              style="display: flex; align-items: center; justify-content: center; background-image: url('{% static 'images/section1.jpg' %}'); background-size: cover; color: white; height: 550px; width: 100%">
             <div class="w3-center">
                 <span style="font-size:100px">&#10077;</span><br>
                 <p class="w3-xlarge">
-                    <b>Животните са много добри приятели, те не задават въпроси, не критикуват. <br>- Джордж Елиът</b>
+                    <b>Можем да съдим какво е сърцето на човек по отношението му към животните.<br>- И. Кан</b>
                 </p>
             </div>
         </div>
@@ -42,7 +42,10 @@
                         <label for="testimonial" class="w3-large">Споделете вашето мнение:</label>
                         <input type="text" name="testimonial" id="testimonial" class="w3-input w3-border w3-round-large"
                                style="margin-top: 10px" placeholder="Вашето мнение...">
-                        <button type="submit" class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal w3-margin-top">Изпрати</button>
+                        <button type="submit"
+                                class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal w3-margin-top">
+                            Изпрати
+                        </button>
                     </form>
                 {% else %}
                     <p>Ако и Вие искате да споделите с нас какво мислите, моля <a href="{% url 'login' %}">влезте</a> в
@@ -60,7 +63,7 @@
                 <div style="display: flex; flex-direction: row">
                     <div class="w3-display-container">
                         <a href="{% url 'all active posts' %}">
-                            <img src="{% static 'images/posts_button.png' %}" alt="Articles"
+                            <img src="{% static 'images/posts_button.png' %}" alt="Posts"
                                  class="w3-image w3-round-large w3-hover-opacity"
                                  style="width:80%; max-width:300px; margin:10px;">
                         </a>
@@ -73,6 +76,14 @@
                                  style="width:80%; max-width:300px; margin:10px;">
                         </a>
                         <div class=" w3-container w3-xlarge w3-text-blue-gray">Статии</div>
+                    </div>
+                    <div class="w3-display-container">
+                        <a href="{% url 'all donations' %}">
+                            <img src="{% static 'images/charity_button.png' %}" alt="Donations"
+                                 class="w3-image w3-round-large w3-hover-opacity"
+                                 style="width:80%; max-width:300px; margin:10px;">
+                        </a>
+                        <div class=" w3-container w3-xlarge w3-text-blue-gray">Дарения</div>
                     </div>
                 </div>
             </div>

@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'pawssearch.main',
     'pawssearch.articles',
     'pawssearch.posts',
+    'pawssearch.donations',
 ]
 
 MIDDLEWARE = [

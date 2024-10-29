@@ -87,14 +87,11 @@ def submit_testimonial(request):
         if user_email:
             # Send the testimonial email
             send_mail(
-                subject='New User Testimonial',
+                subject='New User Testimonial/ New cause for Donation',
                 message=testimonial,
                 from_email=user_email,
                 recipient_list=['mimsun2@gmail.com'],
             )
-            messages.success(request, 'Thank you for submitting your testimonial!')
-        else:
-            messages.error(request, 'You need a valid email address to submit a testimonial.')
 
         return redirect('index')
 

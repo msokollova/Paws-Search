@@ -7,4 +7,6 @@ urlpatterns = [
     path('accounts/', include('pawssearch.accounts.urls')),
     path('articles/', include('pawssearch.articles.urls')),
     path('posts/', include('pawssearch.posts.urls')),
+    path('donations/', include('pawssearch.donations.urls')),
+
 ]

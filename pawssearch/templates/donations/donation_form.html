@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <form method="post" enctype="multipart/form-data"
+          class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form">
+        <h2 class="w3-text-blue-gray w3-center">{{ action }} на обява за дарение</h2>
+        {% csrf_token %}
+        <p>
+            <label class="w3-text-black"><b>Заглавие</b></label><br>
+            {{ form.title }}
+            {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+    
+        <p>
+            <label class="w3-text-black"><b>Организатор</b></label><br>
+            {{ form.organizer }}
+            {% if form.organizer.errors %}
+                {% for error in form.organizer.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+    
+        <p>
+            <label class="w3-text-black"><b>Описание</b></label><br>
+            {{ form.description }}
+            {% if form.description.errors %}
+                {% for error in form.description.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Номер на сметка</b></label><br>
+            {{ form.iban }}
+            {% if form.iban.errors %}
+                {% for error in form.iban.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Крайна дата</b></label><br>
+            {{ form.to_date }}
+            {% if form.to_date.errors %}
+                {% for error in form.to_date.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Необходима сума</b></label><br>
+            {{ form.target_amount }}
+            {% if form.target_amount.errors %}
+                {% for error in form.target_amount.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <p>
+            <label class="w3-text-black"><b>Телефон за връзка</b></label><br>
+            {{ form.contact_info }}
+            {% if form.contact_info.errors %}
+                {% for error in form.contact_info.errors %}
+                    <span class="w3-text-red w3-small">{{ error }}</span><br>
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <div class="w3-center">
+            <a href="{% url 'all donations' %}"
+               class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan">Назад</a>
+            <button class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
+                    type="submit">Запази
+            </button>
+        </div>
+    </form>
+{% endblock %}
