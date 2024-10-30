@@ -4,26 +4,7 @@
 
     <h2 class="w3-center w3-text-blue-gray">Направи дарение</h2>
 
-    {% if user.is_authenticated %}
-        <div class="w3-margin-top">
-        <form action="{% url 'submit_testimonial' %}" method="post">
-            {% csrf_token %}
-            <div class="w3-center">
-                <label for="testimonial" class="w3-large">Ако и Вие искате да публикуваме обява за дарение, моля
-                    свържете се с нас:</label>
-                <input type="text" name="testimonial" id="testimonial" class="w3-input w3-border w3-round-large"
-                       style="margin-top: 10px" placeholder="Вашата кауза...">
-                <button type="submit"
-                        class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal w3-margin-top">
-                    Изпрати
-                </button>
-            </div>
-        </form>
-    {% else %}
-        <p>Ако и Вие искате да искате да публикуваме обява за дарение, моля <a href="{% url 'login' %}">влезте</a> в
-            профила си.</p>
-    {% endif %}
-
+    <p class="w3-center">Ако искате да споделим кауза за събиране на средства, моля <a href="{% url 'contact' %}">свържете</a> се с нас.</p>
     {% if user.is_staff %}
         <div class="w3-right w3-margin">
             <a href="{% url 'add donation' %}"
@@ -34,7 +15,7 @@
     <!-- Filter Form -->
     <form method="get" class="w3-row-padding w3-margin-bottom">
         <div class="w3-half">
-            <label for="organizer">Organizer Type</label>
+            <label for="organizer">Дарение за</label>
             <select name="organizer" id="organizer" class="w3-select">
                 <option value="">Всички</option>
                 {% for code, name in organizer_choices %}
@@ -43,7 +24,7 @@
             </select>
         </div>
         <div class="w3-half">
-            <label for="status">Status</label>
+            <label for="status">Статус</label>
             <select name="status" id="status" class="w3-select">
                 <option value="">Всички</option>
                 {% for code, name in status_choices %}
