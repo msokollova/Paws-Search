@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="" class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post">
+        {% csrf_token %}
+        <h2 class="w3-text-blue-gray w3-center w3-margin h2">Свържете се с нас</h2>
+
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-text-blue-gray" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
+            <div class="w3-rest">
+                <input class="w3-input w3-border" name="email" type="text" placeholder="Email">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-text-blue-gray" style="width:50px"><i class="w3-xxlarge fa fa-phone"></i></div>
+            <div class="w3-rest">
+                <input class="w3-input w3-border" name="phone" type="text" placeholder="Phone">
+            </div>
+        </div>
+
+        <div class="w3-row w3-section">
+            <div class="w3-col w3-text-blue-gray" style="width:50px"><i class="w3-xxlarge fa fa-pencil"></i></div>
+            <div class="w3-rest">
+                <input class="w3-input w3-border" name="message" type="text" placeholder="Message">
+            </div>
+        </div>
+        <div class="w3-center">
+            <button class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal">
+                Изпрати
+            </button>
+        </div>
+    </form>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="w3-panel w3-padding w3-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

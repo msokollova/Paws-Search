@@ -9,4 +9,5 @@ urlpatterns = [
     path('post/<int:pk>/follow/', FollowPostView.as_view(), name='follow post'),
     path('post/<int:pk>/unfollow/', UnfollowPostView.as_view(), name='unfollow post'),
     path('submit-testimonial/', views.submit_testimonial, name='submit_testimonial'),
+    path('contact/', views.contact_view, name='contact'),
 ]

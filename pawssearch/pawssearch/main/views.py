@@ -1,7 +1,8 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage, send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -85,14 +86,44 @@ def submit_testimonial(request):
         # Get the user's email
         user_email = request.user.email
         if user_email:
-            # Send the testimonial email
-            send_mail(
-                subject='New User Testimonial/ New cause for Donation',
-                message=testimonial,
-                from_email=user_email,
-                recipient_list=['mimsun2@gmail.com'],
+            # Create an email message with Reply-To header
+            email = EmailMessage(
+                subject='New User Testimonial',
+                body=testimonial,
+                from_email=user_email,  # Ensure a consistent sender email
+                to=['mimsun2@gmail.com'],
+                reply_to=[user_email],  # This directs replies to the user's email
             )
+            email.send(fail_silently=False)
 
         return redirect('index')
 
     return redirect('index')
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+
+        if email and message:  # Basic validation
+            # Compose the email content
+            full_message = f"Message from: {email}\nPhone: {phone}\n\nMessage:\n{message}"
+
+            # Send email
+            send_mail(
+                subject="Contact Us Inquiry",
+                message=full_message,
+                from_email=settings.DEFAULT_FROM_EMAIL,  # Uses the imported settings module
+                recipient_list=['mimsun2@gmail.com'],  # Replace with actual recipient
+                fail_silently=False,
+            )
+
+            messages.success(request, "Вашето съобщение е изпратено успешно!")
+            return redirect('contact')  # Redirect after successful submission
+
+        else:
+            messages.error(request, "Моля, попълнете всички задължителни полета.")
+
+    return render(request, 'contact.html')
