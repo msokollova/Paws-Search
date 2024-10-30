@@ -6,7 +6,7 @@ UserModel = get_user_model()
 
 @admin.register(UserModel)
 class UserModelAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'full_name', 'email')
-    list_filter = ('email',)
-    search_fields = ('email', 'first_name', 'last_name')
-    search_help_text = 'Search by Email, First name or Last name'
+    list_display = ('username', 'first_name', 'last_name', 'email', 'is_staff', 'is_active')
+    list_filter = ('is_staff', 'is_active')
+    search_fields = ('email', 'first_name', 'last_name', 'username')
+    search_help_text = 'Search by Username, Email, First name or Last name'
