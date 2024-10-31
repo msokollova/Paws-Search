@@ -8,7 +8,7 @@ class ArticleForm(forms.ModelForm):
         fields = ('title', 'url', 'image')
 
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'w3-input', 'placeholder': 'Enter article title'}),
-            'url': forms.URLInput(attrs={'class': 'w3-input', 'placeholder': 'Article URL'}),
-            'image': forms.URLInput(attrs={'class': 'w3-input', 'placeholder': 'Image URL (optional)'}),
+            'title': forms.TextInput(attrs={'class': 'w3-input', 'placeholder': 'Заглавие на статията'}),
+            'url': forms.URLInput(attrs={'class': 'w3-input', 'placeholder': 'URL на статията'}),
+            'image': forms.URLInput(attrs={'class': 'w3-input', 'placeholder': 'URL снимка (не е задължително)'}),
         }
