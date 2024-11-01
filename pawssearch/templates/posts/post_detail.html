@@ -54,7 +54,7 @@
                     <p><strong>Публикувана на:</strong> {{ post.pub_date|date:"d M, Y" }}</p>
                 {% endif %}
 
-                <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Описание: </strong>{{ post.description }}</p>          
+                <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Описание: </strong>{{ post.description }}</p>
                 <h4>Коментари</h4>
                 {% if comments %}
                     <div class="w3-row">
@@ -63,12 +63,12 @@
                                 <p><strong>{{ comment.user.username }}</strong> on {{ comment.pub_date|date:"d M, Y" }}
                                 </p>
                                 <p>{{ comment.comment }}</p>
-                                {% if is_post_author %}
+                                {% if is_post_author  or request.user.is_superuser %}
                                     <form action="{% url 'delete comment' post.pk comment.pk %}" method="post">
                                         {% csrf_token %}
                                         <button type="submit"
                                                 class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange">
-                                            Delete
+                                            Изтриване
                                         </button>
                                     </form>
                                 {% endif %}
@@ -95,12 +95,14 @@
 
                 <div class="w3-center">
                     <button id="back-btn"
-                            class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan" style="width:20%">
+                            class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan"
+                            style="width:20%">
                         Назад
                     </button>
-                    {% if post.user == request.user %}
+                    {% if post.user == request.user or request.user.is_superuser %}
                         <a href="{% url 'edit post' post.pk %}"
-                           class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal" style="width:20%">Edit</a>
+                           class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
+                           style="width:20%">Редактиране</a>
                     {% endif %}
                 </div>
             </div>

@@ -88,7 +88,7 @@ def submit_testimonial(request):
         if user_email:
             # Create an email message with Reply-To header
             email = EmailMessage(
-                subject='New User Testimonial',
+                subject='New User Opinion',
                 body=testimonial,
                 from_email=user_email,  # Ensure a consistent sender email
                 to=['mimsun2@gmail.com'],
@@ -113,7 +113,7 @@ def contact_view(request):
 
             # Send email
             send_mail(
-                subject="Contact Us Inquiry",
+                subject="Contact Us - Inquiry",
                 message=full_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,  # Uses the imported settings module
                 recipient_list=['mimsun2@gmail.com'],  # Replace with actual recipient

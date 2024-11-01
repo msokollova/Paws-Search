@@ -17,7 +17,7 @@ class LogInForm(auth_forms.AuthenticationForm):
         widget=forms.TextInput(
             attrs={
                 'autofocus': True,
-                'placeholder': 'Username',
+                'placeholder': 'Потребителско име',
             }))
 
     password = forms.CharField(
@@ -25,7 +25,7 @@ class LogInForm(auth_forms.AuthenticationForm):
         widget=forms.PasswordInput(
             attrs={
                 'autocomplete': 'current-password',
-                'placeholder': 'Password'
+                'placeholder': 'Парола'
             }
         )
     )

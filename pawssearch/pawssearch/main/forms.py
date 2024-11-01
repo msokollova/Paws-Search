@@ -8,5 +8,5 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ['comment']
         widgets = {
-            'comment': forms.Textarea(attrs={'class': 'w3-input', 'placeholder': 'Add a comment...', 'rows': 3}),
+            'comment': forms.Textarea(attrs={'class': 'w3-input', 'placeholder': 'Добавете коментар...', 'rows': 3}),
         }
