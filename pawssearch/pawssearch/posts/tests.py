@@ -18,7 +18,7 @@ class PostFormTests(TestCase):
             'pet_type': 'DOG',
             'post_type': 'MISSING',
             'contact_info': '123456789',
-            'image': 'http://example.com/image.jpg',
+            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg',
             'region': 'SOFIA',
         }
         form = PostForm(data=form_data)
@@ -30,7 +30,7 @@ class PostFormTests(TestCase):
             'pet_type': 'DOG',
             'post_type': 'MISSING',
             'contact_info': '123456789',
-            'image': 'http://example.com/image.jpg',
+            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg',
             'region': 'SOFIA',
         }
         form = PostForm(data=form_data)
@@ -64,7 +64,7 @@ class PostViewsTests(TestCase):
             'pet_type': 'DOG',
             'post_type': 'MISSING',
             'contact_info': '123456789',
-            'image': 'http://example.com/image.jpg',
+            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg',
             'region': 'SOFIA',
         })
         self.assertRedirects(response, reverse('user posts'))
@@ -86,7 +86,7 @@ class PostViewsTests(TestCase):
             'pet_type': 'DOG',
             'post_type': 'FOUND',
             'contact_info': '987654321',
-            'image': 'http://example.com/new-image.jpg',
+            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg',
             'region': 'SOFIA',
         })
         self.assertRedirects(response, reverse('user posts'))

@@ -13,8 +13,8 @@ class ArticlesTests(TestCase):
         self.staff_user = User.objects.create_user(username='staffuser', password='TestPass123', email='teststaffuser@example.com', is_staff=True)
         self.article = Article.objects.create(
             title="Sample Article",
-            url="http://example.com",
-            image="http://example.com/image.jpg"
+            url="https://www.pexels.com/search/dog/",
+            image="https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg"
         )
 
     def test_article_list_view(self):
@@ -27,8 +27,8 @@ class ArticlesTests(TestCase):
         self.client.login(username='staffuser', password='TestPass123')
         response = self.client.post(reverse('add article'), {
             'title': 'New Article',
-            'url': 'http://newarticle.com',
-            'image': 'http://newarticle.com/image.jpg'
+            'url': 'https://www.pexels.com/search/dog/',
+            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg'
         })
         self.assertRedirects(response, reverse('all article'))
         self.assertTrue(Article.objects.filter(title='New Article').exists())
@@ -37,8 +37,8 @@ class ArticlesTests(TestCase):
         self.client.login(username='staffuser', password='TestPass123')
         response = self.client.post(reverse('edit article', args=[self.article.pk]), {
             'title': 'Updated Title',
-            'url': 'http://example.com/updated',
-            'image': 'http://example.com/newimage.jpg',
+            'url': 'https://www.pexels.com/search/dog/',
+            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg',
         })
         self.assertRedirects(response, reverse('all article'))
         self.article.refresh_from_db()

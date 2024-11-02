@@ -31,7 +31,7 @@ class LoginView(auth_views.LoginView):
     success_url = reverse_lazy('index')
 
     def form_invalid(self, form):
-        messages.error(self.request, "Invalid username or password.")
+        messages.error(self.request, "Невалидно потребителско име или парола.")
         return super().form_invalid(form)
 
 

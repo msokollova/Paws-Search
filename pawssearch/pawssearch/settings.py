@@ -57,10 +57,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pawssearch.wsgi.application'
 
 # Database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config('NAME_DB'),
+        "USER": config('USER_DB'),
+        "PASSWORD": config('PASSWORD_DB'),
+        "HOST": config('HOST_DB'),
+        "PORT": config('PORT_DB'),
     }
 }
 
