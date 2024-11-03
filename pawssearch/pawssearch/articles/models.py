@@ -13,12 +13,6 @@ class Article(models.Model):
         blank=False,
     )
 
-    image = models.URLField(
-        null=True,
-        blank=True,
-    )
-
     pub_date = models.DateField(
         auto_now=True,
     )
-

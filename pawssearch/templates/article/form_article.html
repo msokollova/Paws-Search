@@ -23,16 +23,6 @@
             {% endfor %}
         {% endif %}
     </p>
-    <p>
-        <label class="w3-text-black"><b>URL снимка</b></label><br>
-        {{ form.image }}
-        {% if form.image.errors %}
-            {% for error in form.image.errors %}
-                <span class="w3-text-red w3-small">{{ error }}</span><br>
-            {% endfor %}
-        {% endif %}
-    </p>
-
     <div class="w3-center">
         <a href="{% url 'all article' %}"
            class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan"

@@ -12,8 +12,15 @@ def is_staff(user):
 
 # List of articles
 def article_list(request):
-    articles = Article.objects.all()
-    return render(request, 'article/all_article.html', {'articles': articles})
+    query = request.GET.get('search', '')  # Get the search query from the request
+    if query:
+        # Filter articles by title if a search query is provided
+        articles = Article.objects.filter(title__icontains=query)
+    else:
+        # Return all articles if no search query is provided
+        articles = Article.objects.all()
+
+    return render(request, 'article/all_article.html', {'articles': articles, 'search_query': query})
 
 
 # Add new article (staff only)

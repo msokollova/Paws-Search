@@ -8,13 +8,10 @@ User = get_user_model()
 
 class ArticlesTests(TestCase):
     def setUp(self):
-        # Regular user and staff user
-        self.user = User.objects.create_user(username='user', password='TestPass123', email='testuser@example.com', is_staff=False)
         self.staff_user = User.objects.create_user(username='staffuser', password='TestPass123', email='teststaffuser@example.com', is_staff=True)
         self.article = Article.objects.create(
             title="Sample Article",
-            url="https://www.pexels.com/search/dog/",
-            image="https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg"
+            url="https://www.pexels.com/search/dog/"
         )
 
     def test_article_list_view(self):
@@ -27,8 +24,7 @@ class ArticlesTests(TestCase):
         self.client.login(username='staffuser', password='TestPass123')
         response = self.client.post(reverse('add article'), {
             'title': 'New Article',
-            'url': 'https://www.pexels.com/search/dog/',
-            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg'
+            'url': 'https://www.pexels.com/search/dog/'
         })
         self.assertRedirects(response, reverse('all article'))
         self.assertTrue(Article.objects.filter(title='New Article').exists())
@@ -37,8 +33,7 @@ class ArticlesTests(TestCase):
         self.client.login(username='staffuser', password='TestPass123')
         response = self.client.post(reverse('edit article', args=[self.article.pk]), {
             'title': 'Updated Title',
-            'url': 'https://www.pexels.com/search/dog/',
-            'image': 'https://www.nylabone.com/-/media/project/oneweb/nylabone/images/dog101/10-intelligent-dog-breeds/golden-retriever-tongue-out.jpg',
+            'url': 'https://www.pexels.com/search/dog/'
         })
         self.assertRedirects(response, reverse('all article'))
         self.article.refresh_from_db()
