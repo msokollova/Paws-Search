@@ -11,8 +11,7 @@
 
             <p>
                 <label class="w3-text-black"><b>Име</b></label><br>
-                <input class="w3-input w3-border w3-light-grey" type="text" name="first_name"
-                       value="{{ form.first_name.value|default_if_none:'' }}" placeholder="First Name">
+                {{ form.first_name }}
                 {% if form.first_name.errors %}
                     {% for error in form.first_name.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>
@@ -22,8 +21,7 @@
 
             <p>
                 <label class="w3-text-black"><b>Фамилия</b></label><br>
-                <input class="w3-input w3-border w3-light-grey" type="text" name="last_name"
-                       value="{{ form.last_name.value|default_if_none:'' }}" placeholder="Last Name">
+                {{ form.last_name }}
                 {% if form.last_name.errors %}
                     {% for error in form.last_name.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>
@@ -33,8 +31,7 @@
 
             <p>
                 <label class="w3-text-black"><b>Email</b></label><br>
-                <input class="w3-input w3-border w3-light-grey" type="email" name="email"
-                       value="{{ form.email.value|default_if_none:'' }}" placeholder="Email">
+                {{ form.email }}
                 {% if form.email.errors %}
                     {% for error in form.email.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>
@@ -44,8 +41,7 @@
 
             <p>
                 <label class="w3-text-black"><b>Profile Picture URL</b></label><br>
-                <input class="w3-input w3-border w3-light-grey" type="url" name="profile_picture"
-                       value="{{ form.profile_picture.value|default_if_none:'' }}" placeholder="Profile Picture URL">
+                {{ form.profile_picture }}
                 {% if form.profile_picture.errors %}
                     {% for error in form.profile_picture.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>

@@ -4,7 +4,8 @@
     {% if user.is_authenticated %}
         <script type="text/javascript">window.location.href = "{% url 'index' %}";</script>
     {% else %}
-        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey auth_form" method="post" action="{% url 'login' %}">
+        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey auth_form" method="post"
+              action="{% url 'login' %}">
             <h2 class="w3-text-blue-gray w3-center">Вход</h2>
             {% csrf_token %}
             <p>
@@ -20,9 +21,7 @@
             </p>
             <p>
                 <label class="w3-text-black"><b>Потребителско име</b></label><br>
-                <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="text" name="username"
-                       placeholder="Enter your username" required>
-
+                {{ form.username }}
                 {% if form.username.errors %}
                     <div class="w3-text-red w3-small">
                         {% for error in form.username.errors %}
@@ -34,8 +33,7 @@
 
             <p>
                 <label class="w3-text-black"><b>Парола</b></label><br>
-                <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="password" name="password"
-                       placeholder="Enter your password" autocomplete="current-password" required>
+                {{ form.password }}
 
                 {% if form.password.errors %}
                     <div class="w3-text-red w3-small">

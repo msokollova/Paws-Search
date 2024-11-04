@@ -4,14 +4,14 @@
     {% if user.is_authenticated %}
         <script type="text/javascript">window.location.href = "{% url 'index' %}";</script>
     {% else %}
-        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey auth_form" method="post" action="{% url 'register' %}">
+        <form class="w3-card-4 w3-round w3-display-middle w3-light-grey auth_form" method="post"
+              action="{% url 'register' %}">
             <h2 class="w3-text-blue-gray w3-center">Регистрация</h2>
 
             {% csrf_token %}
             <p>
                 <label class="w3-text-black"><b>Потребителско име</b></label><br>
-                <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="text" name="username"
-                       placeholder="Enter your username" value="{{ form.username.value|default_if_none:'' }}">
+                {{ form.username }}
             
                 {% if form.username.errors %}
                     {% for error in form.username.errors %}
@@ -19,43 +19,40 @@
                     {% endfor %}
                 {% endif %}
             </p>
-        
+
             <p>
                 <label class="w3-text-black"><b>Email</b></label><br>
-                <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="email" name="email"
-                       placeholder="Enter your email" value="{{ form.email.value|default_if_none:'' }}">
-            
+                {{ form.email }}
+
                 {% if form.email.errors %}
                     {% for error in form.email.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>
                     {% endfor %}
                 {% endif %}
             </p>
-        
+
             <p>
                 <label class="w3-text-black"><b>Парола</b></label><br>
-                <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="password" name="password1"
-                       placeholder="Enter your password" autocomplete="new-password">
-            
+                {{ form.password1 }}
+
                 {% if form.password1.errors %}
                     {% for error in form.password1.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>
                     {% endfor %}
                 {% endif %}
             </p>
-        
+
             <p>
                 <label class="w3-text-black"><b>Потвърдете паролата</b></label><br>
-                <input class="w3-input w3-border w3-margin-bottom w3-light-grey" type="password" name="password2"
-                       placeholder="Confirm your password" autocomplete="new-password">
-            
+                {{ form.password2 }}
+
                 {% if form.password2.errors %}
                     {% for error in form.password2.errors %}
                         <span class="w3-text-red w3-small">{{ error }}</span><br>
                     {% endfor %}
                 {% endif %}
             </p>
-        
+
             <p>Ако вече имате акаунт, <a href="{% url 'login' %}" style="color:dodgerblue">Вход</a></p>
             <p class="w3-center">
                 <button class="w3-button w3-round-large w3-black w3-text-light-grey w3-hover-text-light-blue w3-hover-black w3-large"

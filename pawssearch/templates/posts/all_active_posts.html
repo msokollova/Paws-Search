@@ -7,7 +7,7 @@
 <!-- Filter Form -->
 <form method="get" class="w3-row-padding w3-margin-bottom">
     <div class="w3-third">
-        <label for="pet_type">Тип животно</label>
+        <label for="pet_type">Животно</label>
         <select name="pet_type" id="pet_type" class="w3-select">
             <option value="">Всички</option>
             {% for code, name in pet_types %}
@@ -70,7 +70,7 @@
         </div>
     </div>
 {% else %}
-    <p class="w3-text-grey">Няма активни публикации.</p>
+    <p class="w3-text-grey w3-center">Няма активни публикации.</p>
 {% endif %}
 
 {% endblock %}
