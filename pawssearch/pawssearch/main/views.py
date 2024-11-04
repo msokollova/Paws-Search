@@ -19,7 +19,7 @@ def index(request):
 
 class FollowedPostsView(LoginRequiredMixin, ListView):
     model = Posts
-    template_name = 'accounts/followed_posts.html'  # Create this template
+    template_name = 'accounts/followed_posts.html'
     context_object_name = 'followed_posts'
 
     def get_queryset(self):
@@ -83,16 +83,14 @@ def submit_testimonial(request):
     if request.method == 'POST':
         testimonial = request.POST.get('testimonial', '')
 
-        # Get the user's email
         user_email = request.user.email
         if user_email:
-            # Create an email message with Reply-To header
             email = EmailMessage(
                 subject='New User Opinion',
                 body=testimonial,
-                from_email=user_email,  # Ensure a consistent sender email
+                from_email=user_email,
                 to=['mimsun2@gmail.com'],
-                reply_to=[user_email],  # This directs replies to the user's email
+                reply_to=[user_email],
             )
             email.send(fail_silently=False)
 
@@ -108,20 +106,19 @@ def contact_view(request):
         message = request.POST.get('message')
 
         if email and message:  # Basic validation
-            # Compose the email content
             full_message = f"Message from: {email}\nPhone: {phone}\n\nMessage:\n{message}"
 
             # Send email
             send_mail(
                 subject="Contact Us - Inquiry",
                 message=full_message,
-                from_email=settings.DEFAULT_FROM_EMAIL,  # Uses the imported settings module
-                recipient_list=['mimsun2@gmail.com'],  # Replace with actual recipient
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=['mimsun2@gmail.com'],
                 fail_silently=False,
             )
 
             messages.success(request, "Вашето съобщение е изпратено успешно!")
-            return redirect('contact')  # Redirect after successful submission
+            return redirect('contact')
 
         else:
             messages.error(request, "Моля, попълнете всички задължителни полета.")

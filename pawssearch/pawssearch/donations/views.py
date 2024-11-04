@@ -9,13 +9,11 @@ from pawssearch.donations.forms import DonationForm
 from pawssearch.donations.models import Donation, Organizers
 
 
-# Check if user is staff
 class StaffRequiredMixin(UserPassesTestMixin):
     def test_func(self):
         return self.request.user.is_staff
 
 
-# List of donations
 class DonationListView(ListView):
     model = Donation
     template_name = 'donations/all_donations.html'
@@ -46,7 +44,6 @@ class DonationListView(ListView):
         return context
 
 
-# Add new donation (staff only)
 class DonationCreateView(StaffRequiredMixin, CreateView):
     model = Donation
     form_class = DonationForm
@@ -59,7 +56,6 @@ class DonationCreateView(StaffRequiredMixin, CreateView):
         return context
 
 
-# Edit existing donation (staff only)
 class DonationUpdateView(StaffRequiredMixin, UpdateView):
     model = Donation
     form_class = DonationForm
@@ -72,7 +68,6 @@ class DonationUpdateView(StaffRequiredMixin, UpdateView):
         return context
 
 
-# Delete a donation (staff only)
 class DonationDeleteView(StaffRequiredMixin, DeleteView):
     model = Donation
     template_name = 'donations/donation_confirm_delete.html'
