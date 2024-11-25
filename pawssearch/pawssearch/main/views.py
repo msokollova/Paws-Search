@@ -31,7 +31,6 @@ class FollowPostView(LoginRequiredMixin, View):
     def post(self, request, pk):
         post = get_object_or_404(Posts, pk=pk)
         follow, created = Follow.objects.get_or_create(user=request.user, post=post)
-
         if created:
             return JsonResponse({'status': 'followed'})
         else:
@@ -42,7 +41,6 @@ class UnfollowPostView(LoginRequiredMixin, View):
     def post(self, request, pk):
         post = get_object_or_404(Posts, pk=pk)
         follow = Follow.objects.filter(user=request.user, post=post)
-
         if follow.exists():
             follow.delete()
             return JsonResponse({'status': 'unfollowed'})
@@ -70,11 +68,9 @@ def add_comment(request, post_id):
 def delete_comment(request, post_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk, post__pk=post_pk)
     post = comment.post
-
     if post.user == request.user:
         comment.delete()
         return redirect('detail post', pk=post.pk)
-
     return redirect('detail post', pk=post.pk)
 
 
@@ -82,7 +78,6 @@ def delete_comment(request, post_pk, comment_pk):
 def submit_testimonial(request):
     if request.method == 'POST':
         testimonial = request.POST.get('testimonial', '')
-
         user_email = request.user.email
         if user_email:
             email = EmailMessage(
@@ -93,9 +88,7 @@ def submit_testimonial(request):
                 reply_to=[user_email],
             )
             email.send(fail_silently=False)
-
         return redirect('index')
-
     return redirect('index')
 
 
@@ -105,10 +98,8 @@ def contact_view(request):
         phone = request.POST.get('phone')
         message = request.POST.get('message')
 
-        if email and message:  # Basic validation
+        if email and message:
             full_message = f"Message from: {email}\nPhone: {phone}\n\nMessage:\n{message}"
-
-            # Send email
             send_mail(
                 subject="Contact Us - Inquiry",
                 message=full_message,
@@ -116,11 +107,8 @@ def contact_view(request):
                 recipient_list=['mimsun2@gmail.com'],
                 fail_silently=False,
             )
-
             messages.success(request, "Вашето съобщение е изпратено успешно!")
             return redirect('contact')
-
         else:
             messages.error(request, "Моля, попълнете всички задължителни полета.")
-
     return render(request, 'contact.html')
