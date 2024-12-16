@@ -20,15 +20,15 @@
             <div class="w3-center" style="width: 100%;">
                 <h2 class="w3-text-blue-gray">Какво казват нашите потребители:</h2>
                 <div class="testimonials-container">
-                    <div class="testimonial">
+                    <div class="testimonial w3-white">
                         <p>"Тук намерих нов приятел, благодаря на PawsSearch!"</p>
                         <p class="author">- Иван</p>
                     </div>
-                    <div class="testimonial">
+                    <div class="testimonial w3-white">
                         <p>"Отлично място за свързване с любители на животни."</p>
                         <p class="author">- Мария</p>
                     </div>
-                    <div class="testimonial">
+                    <div class="testimonial w3-white">
                         <p>"Благодаря на PawsSearch, че ми помогна да намеря дом за моя любимец!"</p>
                         <p class="author">- Георги</p>
                     </div>
@@ -39,11 +39,13 @@
                     <div class="w3-margin-top">
                     <form action="{% url 'submit_testimonial' %}" method="post">
                         {% csrf_token %}
-                        <label for="testimonial" class="w3-large">Споделете вашето мнение:</label>
-                        <input type="text" name="testimonial" id="testimonial" class="w3-input w3-border w3-round-large"
-                               style="margin-top: 10px" placeholder="Вашето мнение...">
+                        <label for="testimonial" class="w3-large w3-text-blue-gray">Споделете вашето мнение:</label>
+                        <textarea type="text" name="testimonial" id="testimonial"
+                                  class="w3-input w3-border w3-round-large w3-margin-top"
+                                  style="margin-top: 10px; width: 60%; margin: auto;word-wrap: break-word; white-space: pre-wrap;"
+                                  placeholder="Вашето мнение..."></textarea>
                         <button type="submit"
-                                class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal w3-margin-top">
+                                class="w3-button w3-round-large w3-blue-gray w3-text-light-grey w3-hover-text-black w3-hover-blue-gray w3-margin-top">
                             Изпрати
                         </button>
                     </form>

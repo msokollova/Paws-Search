@@ -33,7 +33,7 @@
                             <h3>{{ post.title }}</h3>
                             <p><strong>Животно:</strong> {{ post.get_pet_type_display }}</p>
                             <p><strong>Тип на обява:</strong> {{ post.get_post_type_display }}</p>
-                            <p><strong>Статус:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
+                            <p><strong>Статус:</strong> {{ post.is_active|yesno:"Активна,Неактивна" }}</p>
                             <p><strong>Регион:</strong> {{ post.get_region_display }}</p>
                             {% if post.contact_info %}
                                 <p><strong>Телефон за връзка:</strong> {{ post.contact_info }}</p>
@@ -46,7 +46,7 @@
                     <h3>{{ post.title }}</h3>
                     <p><strong>Животно:</strong> {{ post.get_pet_type_display }}</p>
                     <p><strong>Тип на обява:</strong> {{ post.get_post_type_display }}</p>
-                    <p><strong>Статус:</strong> {{ post.is_active|yesno:"Active,Inactive" }}</p>
+                    <p><strong>Статус:</strong> {{ post.is_active|yesno:"Активна,Неактивна" }}</p>
                     <p><strong>Регион:</strong> {{ post.get_region_display }}</p>
                     {% if post.contact_info %}
                         <p><strong>Телефон за връзка:ж</strong> {{ post.contact_info }}</p>
@@ -59,7 +59,7 @@
                 {% if comments %}
                     <div class="w3-row">
                         {% for comment in comments %}
-                            <div class="w3-card w3-margin w3-padding">
+                            <div>
                                 <p><strong>{{ comment.user.username }}</strong> on {{ comment.pub_date|date:"d M, Y" }}
                                 </p>
                                 <p>{{ comment.comment }}</p>
@@ -87,7 +87,7 @@
                             {{ form.comment }}
                         </p>
                         <button type="submit"
-                                class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
+                                class="w3-button w3-round-large w3-blue-gray w3-text-light-grey w3-hover-text-black w3-hover-blue-gray"
                                 style="margin-left: 10px;">Добави
                         </button>
                     </form>
@@ -96,13 +96,13 @@
                 <div class="w3-center">
                     <button id="back-btn"
                             class="w3-button w3-round-large w3-cyan w3-text-light-grey w3-hover-text-black w3-hover-cyan"
-                            style="width:20%">
+                            style="width:5%">
                         Назад
                     </button>
                     {% if post.user == request.user or request.user.is_superuser %}
                         <a href="{% url 'edit post' post.pk %}"
                            class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal"
-                           style="width:20%">Редактиране</a>
+                           style="width:5%">Редактиране</a>
                     {% endif %}
                 </div>
             </div>
@@ -135,32 +135,28 @@
             }
         });
 
-        // When the user lands on the detail post page
         document.addEventListener("DOMContentLoaded", function () {
-            const referrer = document.referrer;  // Get the previous page URL
+            const referrer = document.referrer;  // get the previous page URL
 
-            // Check if the referrer is either "all-active-posts" or "my-posts"
             if (referrer.includes('all-active-posts')) {
                 sessionStorage.setItem('previousPage', '/posts/all-active-posts/');
             } else if (referrer.includes('my-posts')) {
                 sessionStorage.setItem('previousPage', '/posts/my-posts/');
+            } else if (referrer.includes('followed-posts')) {
+                sessionStorage.setItem('previousPage', '/posts/followed-posts/');
             }
         });
 
-        // Handle the back button functionality
         const backButton = document.getElementById('back-btn');
         backButton.addEventListener('click', function () {
-            // Retrieve the stored previous page URL from sessionStorage
             const previousPage = sessionStorage.getItem('previousPage');
+            //console.log(previousPage)
 
             if (previousPage) {
-                // If a previous page is stored, redirect the user there
                 window.location.href = previousPage;
-
-                // Optionally clear the sessionStorage after navigation
+                //console.log(previousPage)
                 sessionStorage.removeItem('previousPage');
             } else {
-                // If no previous page is stored, default to "All Active Posts" page
                 window.location.href = '/posts/all-active-posts/';
             }
         });

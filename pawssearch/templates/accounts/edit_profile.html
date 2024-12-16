@@ -3,7 +3,7 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <form class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post"
+        <form class="w3-round w3-light-grey w3-padding-large other_form" method="post"
               action="{% url 'edit profile' request.user.pk %}">
             <h2 class="w3-text-blue-gray w3-center">Редактиране на профил</h2>
 

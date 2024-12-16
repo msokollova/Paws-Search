@@ -64,14 +64,5 @@ class PasswordChangeDoneView(auth_views.PasswordChangeDoneView):
     template_name = 'accounts/password_change_done.html'
 
 
-class FollowedPostsListView(LoginRequiredMixin, ListView):
-    model = Follow
-    template_name = 'accounts/followed_posts.html'
-    context_object_name = 'posts'
-
-    def get_queryset(self):
-        return Follow.objects.filter(user=self.request.user).select_related('post')
-
-
 class LogoutView:
     pass

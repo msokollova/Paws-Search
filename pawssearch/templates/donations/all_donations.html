@@ -42,10 +42,9 @@
 
     <!-- Donation List -->
     {% if donations %}
-        <div class=" w3-margin-top"
-             style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start;">
+        <div class="w3-container w3-padding-large">
             {% for donation in donations %}
-                <div class="w3-card w3-hover-shadow" style="display: flex; flex-direction: column; height: 100%;">
+                <div class="w3-padding w3-white" style="margin-bottom: 20px">
                     <div class="w3-container">
                         <h3>{{ donation.title }}</h3>
                         <p><strong>Огранизатор:</strong> {{ donation.get_organizer_display }}</p>

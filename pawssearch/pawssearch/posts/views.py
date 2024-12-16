@@ -96,6 +96,16 @@ class UserPostsView(ListView):
         return Posts.objects.filter(user=self.request.user).order_by('-pub_date')
 
 
+class FollowedPostsView(LoginRequiredMixin, ListView):
+    model = Posts
+    template_name = 'posts/followed_posts.html'
+    context_object_name = 'followed_posts'
+
+    def get_queryset(self):
+        user = self.request.user
+        return Posts.objects.filter(follow__user=user, is_active=True).distinct()
+
+
 class AllActivePostsView(ListView):
     model = Posts
     template_name = 'posts/all_active_posts.html'

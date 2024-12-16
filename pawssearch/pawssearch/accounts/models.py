@@ -51,7 +51,11 @@ class PawsSearchUser(auth_model.AbstractUser):
 
     @property
     def full_name(self):
-        if self.last_name or self.last_name:
+        if self.first_name:
+            return f'{self.first_name}'
+        elif self.last_name:
+            return f'{self.last_name}'
+        elif self.first_name and self.last_name:
             return f'{self.first_name} {self.last_name}'
         return self.username
 

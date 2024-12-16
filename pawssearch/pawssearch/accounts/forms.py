@@ -46,7 +46,7 @@ class EditProfileForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email', 'profile_picture')
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'w3-input', 'placeholder': 'Въведете име (не е задължително)'}),
-            'last_name': forms.EmailInput(attrs={'class': 'w3-input', 'placeholder': 'Въведете фамилия (не е задължително)'}),
+            'last_name': forms.TextInput(attrs={'class': 'w3-input', 'placeholder': 'Въведете фамилия (не е задължително)'}),
             'email': forms.EmailInput(attrs={'class': 'w3-input', 'placeholder': 'Въведете email адрес'}),
             'profile_picture': forms.URLInput(attrs={'class': 'w3-input', 'placeholder': 'URL на снимка (не е задължително)'}),
         }

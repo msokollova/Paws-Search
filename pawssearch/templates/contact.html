@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" class="w3-card-4 w3-round w3-light-grey w3-padding-large other_form" method="post">
+    <form action="" class="w3-round w3-light-grey w3-padding-large" method="post">
         {% csrf_token %}
         <h2 class="w3-text-blue-gray w3-center w3-margin h2">Свържи се с нас</h2>
 
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="w3-center">
-            <button class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal">
+            <button class="w3-button w3-round-large w3-blue-gray w3-text-light-grey w3-hover-text-black w3-hover-blue-gray">
                 Изпрати
             </button>
         </div>
@@ -35,7 +35,7 @@
     {% if messages %}
         <div class="messages">
             {% for message in messages %}
-                <div class="w3-panel w3-padding w3-{{ message.tags }}">
+                <div class="w3-panel w3-center w3-padding w3-{{ message.tags }}">
                     {{ message }}
                 </div>
             {% endfor %}

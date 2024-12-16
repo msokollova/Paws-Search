@@ -27,9 +27,11 @@
         {% if articles %}
             <div class="w3-container w3-padding-large cards">
 
-                {% for article in articles %}
-                    <table class="w3-table w3-padding w3-margin">
-                        <tr>
+
+                <table class="w3-table w3-padding w3-margin">
+                    <tr>
+                        {% for article in articles %}
+
                             <td class="w3-large">
                                 <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
                             </td>
@@ -44,8 +46,9 @@
                                 </td>
                                 </tr>
                             {% endif %}
-                    </table>
-                {% endfor %}
+
+                        {% endfor %}
+                </table>
             </div>
         {% else %}
             <p class="w3-center w3-text-grey">Няма намерени статии</p>

@@ -17,16 +17,6 @@ def index(request):
     return render(request, 'index.html')
 
 
-class FollowedPostsView(LoginRequiredMixin, ListView):
-    model = Posts
-    template_name = 'accounts/followed_posts.html'
-    context_object_name = 'followed_posts'
-
-    def get_queryset(self):
-        user = self.request.user
-        return Posts.objects.filter(follow__user=user, is_active=True).distinct()
-
-
 class FollowPostView(LoginRequiredMixin, View):
     def post(self, request, pk):
         post = get_object_or_404(Posts, pk=pk)
@@ -101,7 +91,7 @@ def contact_view(request):
         if email and message:
             full_message = f"Message from: {email}\nPhone: {phone}\n\nMessage:\n{message}"
             send_mail(
-                subject="Contact Us - Inquiry",
+                subject="Contact Us",
                 message=full_message,
                 from_email=settings.DEFAULT_FROM_EMAIL,
                 recipient_list=['mimsun2@gmail.com'],
