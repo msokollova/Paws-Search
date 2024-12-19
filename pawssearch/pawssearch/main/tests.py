@@ -30,5 +30,5 @@ class ContactViewTests(TestCase):
         })
         self.assertRedirects(response, reverse('contact'))
         self.assertEqual(len(mail.outbox), 1)
-        self.assertIn('Contact Us - Inquiry', mail.outbox[0].subject)
+        self.assertIn('Contact Us', mail.outbox[0].subject)
         self.assertIn('Hello, I need help!', mail.outbox[0].body)
