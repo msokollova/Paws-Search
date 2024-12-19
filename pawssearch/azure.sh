@@ -16,4 +16,4 @@ python manage.py migrate
 python manage.py collectstatic --noinput || { echo "Failed to collect static files"; exit 1; }
 
 # Start the gunicorn server
-gunicorn --bind=0.0.0.0 pawssearch.wsgi || { echo "Failed to start gunicorn"; exit 1; }
+gunicorn --bind=0.0.0.0:8000 pawssearch.wsgi || { echo "Failed to start gunicorn"; exit 1; }
