@@ -26,12 +26,9 @@
 
         {% if articles %}
             <div class="w3-container w3-padding-large cards">
-
-
                 <table class="w3-table w3-padding w3-margin">
                     <tr>
                         {% for article in articles %}
-
                             <td class="w3-large">
                                 <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
                             </td>
@@ -40,12 +37,13 @@
                                     <a href="{% url 'edit article' article.pk %}"
                                        class="w3-button w3-round-large w3-teal w3-text-light-grey w3-hover-text-black w3-hover-teal w3-margin-small">Редактиране</a>
                                 </td>
-                                <td>
+                                <td class="w3-container w3-padding-small w3-center">
                                     <a href="{% url 'delete article' article.pk %}"
                                        class="w3-button w3-round-large w3-deep-orange w3-text-light-grey w3-hover-text-black w3-hover-deep-orange w3-margin-small">Изтриване</a>
                                 </td>
-                                </tr>
                             {% endif %}
+                            </tr>
+
 
                         {% endfor %}
                 </table>

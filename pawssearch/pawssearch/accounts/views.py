@@ -1,12 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import views as auth_views, get_user_model, login
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
-from django.views.generic import ListView
 
 from pawssearch.accounts.forms import RegistrationForm, LogInForm, EditProfileForm, PasswordChangeForm
-from pawssearch.main.models import Follow
 
 UserModel = get_user_model()
 

@@ -29,7 +29,7 @@ class PostEditView(LoginRequiredMixin, UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         post = self.get_object()
-        if post.user != request.user:
+        if post.user != request.user and not request.user.is_superuser:
             return redirect('user posts')
         return super().dispatch(request, *args, **kwargs)
 
@@ -81,7 +81,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
     def dispatch(self, request, *args, **kwargs):
         post = self.get_object()
-        if post.user != request.user:
+        if post.user != request.user and not request.user.is_superuser:
             return redirect('user posts')
         return super().dispatch(request, *args, **kwargs)
 

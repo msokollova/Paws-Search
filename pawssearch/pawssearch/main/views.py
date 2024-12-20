@@ -6,7 +6,6 @@ from django.core.mail import EmailMessage, send_mail
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import ListView
 
 from pawssearch.main.forms import CommentForm
 from pawssearch.main.models import Follow, Comment
@@ -49,7 +48,7 @@ def add_comment(request, post_id):
             return JsonResponse({
                 'success': True,
                 'username': request.user.username,
-                'pub_date': comment.pub_date.strftime('%d %b, %Y'),
+                'pub_date': comment.pub_date.strftime('%d.%m.%Y'),
                 'comment': comment.comment
             })
         return JsonResponse({'success': False})
@@ -58,7 +57,7 @@ def add_comment(request, post_id):
 def delete_comment(request, post_pk, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk, post__pk=post_pk)
     post = comment.post
-    if post.user == request.user:
+    if post.user == request.user or request.user.is_superuser:
         comment.delete()
         return redirect('detail post', pk=post.pk)
     return redirect('detail post', pk=post.pk)

@@ -54,7 +54,7 @@
                             Активна  {% endif %}</p>
                         <p><strong>Крайна дата:</strong> {{ donation.to_date }}</p>
                         <p><strong>Телефон за връзка:</strong> {{ donation.contact_info }}</p>
-                        <p><strong>Описание:</strong> {{ donation.description }}</p>
+                        <p style="word-wrap: break-word; white-space: pre-wrap;"><strong>Описание:</strong> {{ donation.description }}</p>
                     </div>
                     <div class="w3-container w3-padding-small w3-center">
                         {% if user.is_staff %}
