@@ -68,7 +68,7 @@
 
 <p>
 <h3>Стъпки за стартиране на проекта:</h3><br>  
-•	Клониране на репозиторията<br>
+•	Клониране на репото<br>
 git clone https://github.com/msokollova/Paws-Search.git<br>
   
 •	Настройка на средата<br>
@@ -76,18 +76,16 @@ python -m venv venv<br>
 venv\Scripts\activate<br>
 pip install -r requirements.txt<br>
 
-•	Изпълнение на миграции и стартиране на сървъра<br>
-python manage.py makemigrations<br>
+•	Изпълнение на миграция и стартиране на сървъра<br>
 python manage.py migrate<br>
 python manage.py runserver<br>
 
 •	Достъп до сайта<br>
- http://127.0.0.1:8000<br>
+ http://localhost:8000<br>
 </p>
 
 <p>
-<h3>Използвани технологии:</h3><br>
-  
+<h3>Използвани технологии:</h3><br>  
 •	Backend: Python, Django<br>
 •	Frontend: HTML, CSS, JavaScript<br>
 •	Batabase: PostreSQL<br>
